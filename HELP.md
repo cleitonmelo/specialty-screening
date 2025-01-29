@@ -1,7 +1,7 @@
 # Read Me First
 The following was discovered as part of building this project:
 
-* The original package name 'br.com.hackaton.specialty-screening ' is invalid and this project uses 'br.com.hackaton.specialty_screening' instead.
+* The original package name 'br.com.hackaton.specialty-screening ' is invalid and this project uses 'br.com.hackaton.specialtyscreening' instead.
 
 # Getting Started
 

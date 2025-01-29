@@ -1,4 +1,4 @@
-package br.com.hackaton.specialty_screening;
+package br.com.hackaton.specialtyscreening;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

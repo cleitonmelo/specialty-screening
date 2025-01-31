@@ -1,43 +1,25 @@
 package br.com.hackaton.specialtyscreening.controller;
 
-import br.com.hackaton.specialtyscreening.dto.UserDto;
-import br.com.hackaton.specialtyscreening.model.Users;
-import br.com.hackaton.specialtyscreening.repository.UserRepository;
-import br.com.hackaton.specialtyscreening.security.jwt.JwtUtil;
+import br.com.hackaton.specialtyscreening.dto.LoginDto;
+import br.com.hackaton.specialtyscreening.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import java.net.URI;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/v1/auth")
 public class AuthController {
-    private final JwtUtil jwtUtil;
-    private final UserRepository userRepository;
+    private final UserService userService;
 
-    public AuthController(JwtUtil jwtUtil, UserRepository userRepository) {
-        this.jwtUtil = jwtUtil;
-        this.userRepository = userRepository;
+    public AuthController(UserService service) {
+        this.userService = service;
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody UserDto userDto) {
-        return jwtUtil.generateToken(userDto.email());
+    public ResponseEntity<String> login(@RequestBody LoginDto userDto) {
+        String token = userService.setToken(userDto.email());
+        return ResponseEntity.ok().body(token);
     }
 
-    @PostMapping("/users")
-    public ResponseEntity<Users> create(@RequestBody UserDto userDto) {
-        Users user = Users.builder().userName(userDto.email()).password("123456").build();
-        Users userCreated = userRepository.save(user);
 
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(userCreated.getId())
-                .toUri();
-
-        return ResponseEntity.created(location).body(userCreated);
-    }
 }
 

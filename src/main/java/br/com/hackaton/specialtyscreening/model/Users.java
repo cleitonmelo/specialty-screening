@@ -1,10 +1,7 @@
 package br.com.hackaton.specialtyscreening.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,6 +11,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 public class Users {
 
     @Id
@@ -25,6 +23,8 @@ public class Users {
 
     @Column(nullable = false)
     private String password;
+
+    private String token;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(

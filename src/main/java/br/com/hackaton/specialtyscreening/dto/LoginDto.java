@@ -1,6 +1,6 @@
 package br.com.hackaton.specialtyscreening.dto;
 
-public record UserDto(
+public record LoginDto(
         String email,
         String password
 ) {

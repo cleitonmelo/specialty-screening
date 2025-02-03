@@ -1,5 +1,10 @@
 package br.com.hackaton.specialtyscreening.service.impl;
 
+import br.com.hackaton.specialtyscreening.dto.ScreeningDTO;
+import br.com.hackaton.specialtyscreening.dto.mappers.ScreeningMapper;
+import br.com.hackaton.specialtyscreening.enums.ScreeningStatus;
+import br.com.hackaton.specialtyscreening.model.Screening;
+import br.com.hackaton.specialtyscreening.repository.ScreeningRepository;
 import br.com.hackaton.specialtyscreening.util.SendEmail;
 import br.com.hackaton.specialtyscreening.service.ScreeningService;
 import org.springframework.stereotype.Service;
@@ -7,32 +12,35 @@ import org.springframework.stereotype.Service;
 @Service
 public class ScreeningServiceImpl implements ScreeningService {
 
-    private final SendEmail mailService;
+    private final ScreeningRepository screeningRepository;
 
-    public ScreeningServiceImpl(SendEmail mailService) {
-        this.mailService = mailService;
+    public ScreeningServiceImpl(ScreeningRepository screeningRepository) {
+        this.screeningRepository = screeningRepository;
     }
 
     @Override
-    public String create()
+    public ScreeningDTO create(ScreeningDTO screeningDTO)
     {
-        this.mailService.sendEmail("teste@email.com",
-                "Notificação de Nova Triagem - Especialista",
-                "<h1> Hackaton - Fiap 2025 </h1>");
-        return "Formulário de triagem criado com sucesso!";
+        Screening screening = ScreeningMapper.toEntity(screeningDTO);
+        if ( screening.getStatus() == null ) {
+            screening.setStatus(ScreeningStatus.AWATING_SPECIALIST);
+        }
+        return ScreeningMapper.toDto(screeningRepository.save(screening));
     }
 
     @Override
-    public String update()
+    public ScreeningDTO update(ScreeningDTO screeningDTO)
     {
-        this.mailService.sendEmail("teste@email.com",
-                "Notificação de Atualização Triagem - Paciente",
-                "<h1> Hackaton - Fiap 2025 </h1>");
-        return "Formulário atualizado com sucesso";
+        Screening screening = ScreeningMapper.toEntity(screeningDTO);
+        return ScreeningMapper.toDto(screeningRepository.save(screening));
     }
 
     @Override
-    public String get(String id) {
-        return "Detalhes do Id: " + id;
+    public ScreeningDTO get(Long id) {
+        Screening screening = screeningRepository.findById(id).orElse(null);
+        if ( screening == null) {
+            return null;
+        }
+        return ScreeningMapper.toDto(screening);
     }
 }

@@ -1,5 +1,6 @@
 package br.com.hackaton.specialtyscreening.controller.resources;
 
+import br.com.hackaton.specialtyscreening.dto.SpecialistDoctorDTO;
 import br.com.hackaton.specialtyscreening.dto.SpecialtyDTO;
 import lombok.Builder;
 
@@ -12,7 +13,7 @@ public record ScreeningResource(
         String patientName,
         SpecialtyDTO specialty,
         String status,
-        String specialistDoctor,
+        SpecialistDoctorDTO specialistDoctor,
         List<Object> medicalExams
 ) {
 }

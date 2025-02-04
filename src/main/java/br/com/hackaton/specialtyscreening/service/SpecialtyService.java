@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface SpecialtyService {
 
-    SpecialtyDTO create(SpecialtyDTO dto);
+    SpecialtyDTO save(SpecialtyDTO dto);
 
     SpecialtyDTO get(Long id);
 

@@ -19,7 +19,7 @@ public class SpecialtyServiceImpl implements SpecialtyService {
     }
 
     @Override
-    public SpecialtyDTO create(SpecialtyDTO dto) {
+    public SpecialtyDTO save(SpecialtyDTO dto) {
         Specialty specialty = specialtyRepository.save(SpecialtyMapper.toEntity(dto));
         return SpecialtyMapper.toDto(specialty);
     }
@@ -38,7 +38,7 @@ public class SpecialtyServiceImpl implements SpecialtyService {
         Specialty specialty = specialtyRepository.findById(id).orElse(null);
         if (specialty != null) {
             SpecialtyDTO specialtyDTO = SpecialtyDTO.builder().id(id).name(dto.name()).build();
-            return SpecialtyMapper.toDto(specialtyRepository.save(SpecialtyMapper.toEntity(specialtyDTO)));
+            return this.save(specialtyDTO);
         }
         return null;
     }

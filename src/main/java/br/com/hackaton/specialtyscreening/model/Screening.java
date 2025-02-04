@@ -21,8 +21,9 @@ public class Screening {
 
     private String patientName;
 
-    @Column(nullable = true)
-    private int specialistDoctorId;
+    @ManyToOne
+    @JoinColumn(name = "specialistDoctorId")
+    private SpecialistDoctor specialistDoctor;
 
     @ManyToOne
     @JoinColumn(name = "specialtyId")

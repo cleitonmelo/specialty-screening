@@ -2,6 +2,7 @@ package br.com.hackaton.specialtyscreening.controller;
 
 import br.com.hackaton.specialtyscreening.dto.SpecialtyDTO;
 import br.com.hackaton.specialtyscreening.service.impl.SpecialtyServiceImpl;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/v1/specialty")
+@Tag(name = "Manutenção de Especialidades",
+        description = "API para gerenciamento de cadastro de especilidades")
 public class SpecialtyController {
 
     private final SpecialtyServiceImpl service;
@@ -32,7 +35,7 @@ public class SpecialtyController {
     @PostMapping
     public ResponseEntity<SpecialtyDTO> create(@RequestBody SpecialtyDTO specialtyDTO){
         return ResponseEntity.status(HttpStatus.CREATED).body(
-            this.service.create(specialtyDTO)
+            this.service.save(specialtyDTO)
         );
     }
 

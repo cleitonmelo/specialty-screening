@@ -49,6 +49,8 @@ public class ScreeningMapper {
                 .patientCode(screening.getPatientCode())
                 .patientName(screening.getPatientName())
                 .specialty(SpecialtyMapper.toDto(screening.getSpecialty()))
+                .specialistDoctor(screening.getSpecialistDoctor() != null ?
+                        SpecialistDoctorMapper.toDto(screening.getSpecialistDoctor()) : null)
                 .status(screening.getStatus().getDescription())
                 .build();
 

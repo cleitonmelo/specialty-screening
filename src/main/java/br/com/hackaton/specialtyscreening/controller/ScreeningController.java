@@ -5,6 +5,7 @@ import br.com.hackaton.specialtyscreening.dto.ScreeningDTO;
 import br.com.hackaton.specialtyscreening.dto.mappers.ScreeningMapper;
 import br.com.hackaton.specialtyscreening.service.impl.ScreeningServiceImpl;
 import br.com.hackaton.specialtyscreening.service.impl.SpecialtyServiceImpl;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/v1/screening")
+@Tag(name = "Formulário de Triagem",
+        description = "API para gerenciamento de cadastro de triagem de especialidades")
 public class ScreeningController {
 
     private final ScreeningServiceImpl screeningService;

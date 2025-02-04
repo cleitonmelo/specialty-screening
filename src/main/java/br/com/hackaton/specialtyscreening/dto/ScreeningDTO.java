@@ -8,7 +8,8 @@ import lombok.Builder;
 public record ScreeningDTO(
         Long id,
         Long patientCode,
-        String specialtyCode,
+        String patientName,
+        Long specialty,
         ScreeningStatus status
 ) {
 }

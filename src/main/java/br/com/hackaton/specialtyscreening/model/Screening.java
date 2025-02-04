@@ -24,8 +24,9 @@ public class Screening {
     @Column(nullable = true)
     private int specialistDoctorId;
 
-    @Column(nullable = false)
-    private String specialtyCode;
+    @ManyToOne
+    @JoinColumn(name = "specialtyId")
+    private Specialty specialty;
 
     @Column(nullable = false)
     private ScreeningStatus status;

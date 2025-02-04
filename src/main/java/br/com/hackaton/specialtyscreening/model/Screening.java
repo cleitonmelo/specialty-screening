@@ -21,11 +21,13 @@ public class Screening {
 
     private String patientName;
 
-    @Column(nullable = true)
-    private int specialistDoctorId;
+    @ManyToOne
+    @JoinColumn(name = "specialistDoctorId")
+    private SpecialistDoctor specialistDoctor;
 
-    @Column(nullable = false)
-    private String specialtyCode;
+    @ManyToOne
+    @JoinColumn(name = "specialtyId")
+    private Specialty specialty;
 
     @Column(nullable = false)
     private ScreeningStatus status;

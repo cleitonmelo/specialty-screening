@@ -1,12 +1,15 @@
 package br.com.hackaton.specialtyscreening.service.impl;
 
+import br.com.hackaton.specialtyscreening.controller.resources.ScreeningResource;
 import br.com.hackaton.specialtyscreening.dto.ScreeningDTO;
 import br.com.hackaton.specialtyscreening.dto.mappers.ScreeningMapper;
 import br.com.hackaton.specialtyscreening.enums.ScreeningStatus;
 import br.com.hackaton.specialtyscreening.model.Screening;
+import br.com.hackaton.specialtyscreening.model.Specialty;
 import br.com.hackaton.specialtyscreening.repository.ScreeningRepository;
-import br.com.hackaton.specialtyscreening.util.SendEmail;
 import br.com.hackaton.specialtyscreening.service.ScreeningService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,7 +24,8 @@ public class ScreeningServiceImpl implements ScreeningService {
     @Override
     public ScreeningDTO create(ScreeningDTO screeningDTO)
     {
-        Screening screening = ScreeningMapper.toEntity(screeningDTO);
+        Screening screening = ScreeningMapper.toEntity(
+                screeningDTO, findSpecialtyById(screeningDTO.specialty()));
         if ( screening.getStatus() == null ) {
             screening.setStatus(ScreeningStatus.AWATING_SPECIALIST);
         }
@@ -31,8 +35,15 @@ public class ScreeningServiceImpl implements ScreeningService {
     @Override
     public ScreeningDTO update(ScreeningDTO screeningDTO)
     {
-        Screening screening = ScreeningMapper.toEntity(screeningDTO);
+        Screening screening = ScreeningMapper.toEntity(
+                screeningDTO, findSpecialtyById(screeningDTO.specialty()));
         return ScreeningMapper.toDto(screeningRepository.save(screening));
+    }
+
+    @Override
+    public Page<ScreeningResource> findAllBySpecialtyCode(Long specialtyId, Pageable pageable) {
+        Page<Screening> screenings = screeningRepository.findBySpecialtyId(specialtyId, pageable);
+        return screenings.map(ScreeningMapper::toResourceByModel);
     }
 
     @Override
@@ -42,5 +53,9 @@ public class ScreeningServiceImpl implements ScreeningService {
             return null;
         }
         return ScreeningMapper.toDto(screening);
+    }
+
+    private Specialty findSpecialtyById(Long id) {
+        return Specialty.builder().id(id).build();
     }
 }

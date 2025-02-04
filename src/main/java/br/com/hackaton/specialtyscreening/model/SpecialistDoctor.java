@@ -1,0 +1,25 @@
+package br.com.hackaton.specialtyscreening.model;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.util.List;
+
+@Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+public class SpecialistDoctor {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
+    private String name;
+
+    @OneToMany
+    private List<Specialty> specialties;
+}

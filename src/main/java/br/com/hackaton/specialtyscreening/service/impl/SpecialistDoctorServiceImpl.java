@@ -4,13 +4,14 @@ import br.com.hackaton.specialtyscreening.dto.SpecialistDoctorDTO;
 import br.com.hackaton.specialtyscreening.dto.mappers.SpecialistDoctorMapper;
 import br.com.hackaton.specialtyscreening.model.SpecialistDoctor;
 import br.com.hackaton.specialtyscreening.repository.SpecialistDoctorRepository;
+import br.com.hackaton.specialtyscreening.service.BaseService;
 import br.com.hackaton.specialtyscreening.service.SpecialistDoctorService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SpecialistDoctorServiceImpl implements SpecialistDoctorService {
+public class SpecialistDoctorServiceImpl extends BaseServiceImpl implements SpecialistDoctorService {
 
     private final SpecialistDoctorRepository repository;
 
@@ -22,6 +23,7 @@ public class SpecialistDoctorServiceImpl implements SpecialistDoctorService {
     public SpecialistDoctorDTO save(SpecialistDoctorDTO dto) {
         SpecialistDoctor specialistDoctor = this.repository.save(
                 SpecialistDoctorMapper.toEntity(dto));
+
         return SpecialistDoctorMapper.toDto(specialistDoctor);
     }
 

@@ -4,7 +4,7 @@ import br.com.hackaton.specialtyscreening.dto.SpecialistDoctorDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-public interface SpecialistDoctorService {
+public interface SpecialistDoctorService extends BaseService{
 
     SpecialistDoctorDTO save(SpecialistDoctorDTO dto);
 
@@ -13,4 +13,5 @@ public interface SpecialistDoctorService {
     SpecialistDoctorDTO update(Long id, SpecialistDoctorDTO dto);
 
     Page<SpecialistDoctorDTO> findAll(Pageable pageable);
+
 }

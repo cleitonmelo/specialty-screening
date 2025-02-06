@@ -1,5 +1,6 @@
-package br.com.hackaton.specialtyscreening.controller.exception;
+package br.com.hackaton.specialtyscreening.exception;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -9,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestControllerAdvice
-public class ControllerExceptionHandler {
+public class ValidationExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> handleValidationException(MethodArgumentNotValidException exception) {
@@ -19,6 +20,13 @@ public class ControllerExceptionHandler {
                 errors.put(error.getField(), error.getDefaultMessage())
         );
 
+        return ResponseEntity.badRequest().body(errors);
+    }
+
+    @ExceptionHandler(SpecialtyNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleSpecialtyNotFound(SpecialtyNotFoundException exception) {
+        Map<String, String> errors = new HashMap<>();
+        errors.put("error", exception.getMessage());
         return ResponseEntity.badRequest().body(errors);
     }
 }

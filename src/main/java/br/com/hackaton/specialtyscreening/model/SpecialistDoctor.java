@@ -20,6 +20,6 @@ public class SpecialistDoctor {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<Specialty> specialties;
 }

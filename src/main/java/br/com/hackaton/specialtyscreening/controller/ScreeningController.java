@@ -6,6 +6,7 @@ import br.com.hackaton.specialtyscreening.dto.mappers.ScreeningMapper;
 import br.com.hackaton.specialtyscreening.service.impl.ScreeningServiceImpl;
 import br.com.hackaton.specialtyscreening.service.impl.SpecialtyServiceImpl;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -42,9 +43,7 @@ public class ScreeningController {
     }
 
     @PostMapping
-    public ResponseEntity<ScreeningResource> create(@RequestBody ScreeningDTO screeningDTO){
-        //@todo validar dados de inserção
-
+    public ResponseEntity<ScreeningResource> create(@Valid @RequestBody ScreeningDTO screeningDTO){
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 ScreeningMapper.toResource(
                     this.screeningService.create(screeningDTO),

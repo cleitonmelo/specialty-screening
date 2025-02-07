@@ -4,6 +4,7 @@ import br.com.hackaton.specialtyscreening.controller.resources.ScreeningResource
 import br.com.hackaton.specialtyscreening.dto.ScreeningDTO;
 import br.com.hackaton.specialtyscreening.dto.SpecialtyDTO;
 import br.com.hackaton.specialtyscreening.model.Screening;
+import br.com.hackaton.specialtyscreening.model.SpecialistDoctor;
 import br.com.hackaton.specialtyscreening.model.Specialty;
 import lombok.Builder;
 
@@ -24,11 +25,24 @@ public class ScreeningMapper {
               .build();
     }
 
-    public static Screening toEntity(ScreeningDTO dto, Specialty specialty) {
+    public static Screening toEntity(ScreeningDTO dto,
+                                     Specialty specialty) {
         return Screening.builder()
                 .id(dto.id())
                 .patientCode(dto.patientCode())
                 .specialty(specialty)
+                .status(dto.status())
+                .build();
+    }
+
+    public static Screening toEntityByDoctor(ScreeningDTO dto,
+                                             Specialty specialty,
+                                             SpecialistDoctor specialistDoctor) {
+        return Screening.builder()
+                .id(dto.id())
+                .patientCode(dto.patientCode())
+                .specialty(specialty)
+                .specialistDoctor(specialistDoctor)
                 .status(dto.status())
                 .build();
     }

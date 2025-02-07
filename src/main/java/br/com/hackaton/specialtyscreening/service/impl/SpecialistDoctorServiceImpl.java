@@ -4,7 +4,6 @@ import br.com.hackaton.specialtyscreening.dto.SpecialistDoctorDTO;
 import br.com.hackaton.specialtyscreening.dto.mappers.SpecialistDoctorMapper;
 import br.com.hackaton.specialtyscreening.model.SpecialistDoctor;
 import br.com.hackaton.specialtyscreening.repository.SpecialistDoctorRepository;
-import br.com.hackaton.specialtyscreening.service.BaseService;
 import br.com.hackaton.specialtyscreening.service.SpecialistDoctorService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

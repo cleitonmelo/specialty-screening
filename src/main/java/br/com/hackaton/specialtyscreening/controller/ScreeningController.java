@@ -53,7 +53,8 @@ public class ScreeningController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ScreeningResource> update(@RequestBody ScreeningDTO screeningDTO, @PathVariable("id") Long id)
+    public ResponseEntity<ScreeningResource> update(@RequestBody ScreeningDTO screeningDTO,
+                                                    @PathVariable("id") Long id)
     {
         ScreeningDTO dto = this.screeningService.get(id);
         if ( dto == null ) {
@@ -74,5 +75,26 @@ public class ScreeningController {
          return ResponseEntity.ok().body(
                  this.screeningService.findAllBySpecialtyCode(specialtyId,pageable)
          );
+    }
+
+    @PutMapping("/{id}/associateSpecialists/{specialistId}")
+    public ResponseEntity<ScreeningResource> associateSpecialists(@PathVariable("id") Long id,
+                                                                  @PathVariable("specialistId") Long specilistId) {
+
+        if ( this.screeningService.isSpecialistExists(specilistId) )  {
+            return ResponseEntity.notFound().build();
+        }
+
+        ScreeningDTO screeningDTO = this.screeningService.get(id);
+        if ( screeningDTO == null ) {
+            return ResponseEntity.notFound().build();
+        }
+
+        ScreeningResource resource = this.screeningService.associateSpecialist(specilistId, id);
+        if ( resource == null ) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok().body(resource);
     }
 }

@@ -4,6 +4,7 @@ import br.com.hackaton.specialtyscreening.dto.SpecialistDoctorDTO;
 import br.com.hackaton.specialtyscreening.service.SpecialistDoctorService;
 import br.com.hackaton.specialtyscreening.service.impl.SpecialistDoctorServiceImpl;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -34,15 +35,18 @@ public class SpecialistDoctorController {
     }
 
     @PostMapping
-    public ResponseEntity<SpecialistDoctorDTO> create(@RequestBody SpecialistDoctorDTO dto){
+    public ResponseEntity<SpecialistDoctorDTO> create(@Valid @RequestBody SpecialistDoctorDTO dto){
+        if ( ! this.service.isSpecialtyExists(1L) ) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
         return ResponseEntity.status(HttpStatus.CREATED).body(
             this.service.save(dto)
         );
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<SpecialistDoctorDTO> update(@RequestBody SpecialistDoctorDTO specialistDoctorDTO, @PathVariable("id") Long id)
-    {
+    public ResponseEntity<SpecialistDoctorDTO> update(@Valid @RequestBody SpecialistDoctorDTO specialistDoctorDTO,
+                                                      @PathVariable("id") Long id) {
         SpecialistDoctorDTO dto = this.service.get(id);
         if ( dto == null ) {
             return ResponseEntity.notFound().build();

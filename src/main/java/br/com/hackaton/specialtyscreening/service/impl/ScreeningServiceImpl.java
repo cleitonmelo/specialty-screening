@@ -5,6 +5,7 @@ import br.com.hackaton.specialtyscreening.dto.ScreeningDTO;
 import br.com.hackaton.specialtyscreening.dto.mappers.ScreeningMapper;
 import br.com.hackaton.specialtyscreening.enums.ScreeningStatus;
 import br.com.hackaton.specialtyscreening.model.Screening;
+import br.com.hackaton.specialtyscreening.model.SpecialistDoctor;
 import br.com.hackaton.specialtyscreening.model.Specialty;
 import br.com.hackaton.specialtyscreening.repository.ScreeningRepository;
 import br.com.hackaton.specialtyscreening.service.ScreeningService;
@@ -13,7 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ScreeningServiceImpl implements ScreeningService {
+public class ScreeningServiceImpl extends BaseServiceImpl implements ScreeningService {
 
     private final ScreeningRepository screeningRepository;
 
@@ -47,6 +48,21 @@ public class ScreeningServiceImpl implements ScreeningService {
     }
 
     @Override
+    public ScreeningResource associateSpecialist(Long specialistId, Long id) {
+        Screening screening = screeningRepository.findById(id).orElse(null);
+        if ( screening != null ) {
+            screening.setStatus(ScreeningStatus.IN_ANALYSIS);
+            ScreeningDTO screeningDTO = ScreeningMapper.toDto(screening);
+            return ScreeningMapper.toResourceByModel(
+                        screeningRepository.save(ScreeningMapper.toEntityByDoctor(screeningDTO,
+                                findSpecialtyById(screening.getId()),
+                                findDoctorById(specialistId))
+                        ));
+        }
+        return null;
+    }
+
+    @Override
     public ScreeningDTO get(Long id) {
         Screening screening = screeningRepository.findById(id).orElse(null);
         if ( screening == null) {
@@ -57,5 +73,9 @@ public class ScreeningServiceImpl implements ScreeningService {
 
     private Specialty findSpecialtyById(Long id) {
         return Specialty.builder().id(id).build();
+    }
+
+    private SpecialistDoctor findDoctorById(Long id) {
+        return SpecialistDoctor.builder().id(id).build();
     }
 }

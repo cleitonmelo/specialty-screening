@@ -10,7 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SpecialistDoctorServiceImpl implements SpecialistDoctorService {
+public class SpecialistDoctorServiceImpl extends BaseServiceImpl implements SpecialistDoctorService {
 
     private final SpecialistDoctorRepository repository;
 
@@ -22,6 +22,7 @@ public class SpecialistDoctorServiceImpl implements SpecialistDoctorService {
     public SpecialistDoctorDTO save(SpecialistDoctorDTO dto) {
         SpecialistDoctor specialistDoctor = this.repository.save(
                 SpecialistDoctorMapper.toEntity(dto));
+
         return SpecialistDoctorMapper.toDto(specialistDoctor);
     }
 

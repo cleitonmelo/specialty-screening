@@ -13,5 +13,5 @@ public record SpecialistDoctorDTO(
         String name,
         @NotEmpty(message = "Necessário selecionar ao menos uma especialidade.")
         List<SpecialtyDTO> specialties
-) {
+) implements BaseDto{
 }

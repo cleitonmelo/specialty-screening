@@ -19,6 +19,7 @@ public class ScreeningServiceImpl extends BaseServiceImpl implements ScreeningSe
     private final ScreeningRepository screeningRepository;
 
     public ScreeningServiceImpl(ScreeningRepository screeningRepository) {
+        super();
         this.screeningRepository = screeningRepository;
     }
 

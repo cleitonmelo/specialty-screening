@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-public class SpecialistDoctor {
+public class SpecialistDoctor implements BaseModel{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

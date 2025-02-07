@@ -21,11 +21,4 @@ public class ValidationExceptionHandler {
 
         return ResponseEntity.badRequest().body(errors);
     }
-
-    @ExceptionHandler(SpecialtyNotFoundException.class)
-    public ResponseEntity<Map<String, String>> handleSpecialtyNotFound(SpecialtyNotFoundException exception) {
-        Map<String, String> errors = new HashMap<>();
-        errors.put("error", exception.getMessage());
-        return ResponseEntity.badRequest().body(errors);
-    }
 }

@@ -3,9 +3,12 @@ package br.com.hackaton.specialtyscreening.controller;
 import br.com.hackaton.specialtyscreening.dto.SpecialtyDTO;
 import br.com.hackaton.specialtyscreening.service.impl.SpecialtyServiceImpl;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -50,7 +53,9 @@ public class SpecialtyController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<SpecialtyDTO>> findAll(Pageable pageable) {
+    public ResponseEntity<Page<SpecialtyDTO>> findAll(
+            @ParameterObject
+            @PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
          return ResponseEntity.ok().body(this.service.findAll(pageable));
     }
 }

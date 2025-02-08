@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-public class SpecialistDoctor {
+public class SpecialistDoctor implements BaseModel{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +20,6 @@ public class SpecialistDoctor {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<Specialty> specialties;
 }

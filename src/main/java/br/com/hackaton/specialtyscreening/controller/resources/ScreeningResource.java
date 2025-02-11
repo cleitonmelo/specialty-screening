@@ -15,5 +15,5 @@ public record ScreeningResource(
         String status,
         SpecialistDoctorDTO specialistDoctor,
         List<Object> medicalExams
-) {
+) implements BaseResource{
 }

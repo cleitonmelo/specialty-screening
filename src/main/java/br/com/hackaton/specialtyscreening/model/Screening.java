@@ -10,7 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter @Setter
-public class Screening {
+public class Screening implements BaseModel{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

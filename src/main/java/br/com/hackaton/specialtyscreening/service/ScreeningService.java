@@ -5,7 +5,7 @@ import br.com.hackaton.specialtyscreening.dto.ScreeningDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-public interface ScreeningService {
+public interface ScreeningService extends BaseService{
 
     ScreeningDTO create(ScreeningDTO screeningDTO);
 
@@ -14,4 +14,6 @@ public interface ScreeningService {
     ScreeningDTO update(ScreeningDTO screeningDto);
 
     Page<ScreeningResource> findAllBySpecialtyCode(Long specialtyCode, Pageable pageable);
+
+    ScreeningResource associateSpecialist(Long specialistId, Long id);
 }

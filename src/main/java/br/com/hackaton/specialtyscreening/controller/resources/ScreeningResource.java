@@ -10,7 +10,7 @@ import java.util.List;
 @Builder
 public record ScreeningResource(
         Long id,
-        Long patientCode,
+        String patientCode,
         String patientName,
         SpecialtyDTO specialty,
         String status,

@@ -4,6 +4,7 @@ import br.com.hackaton.specialtyscreening.controller.resources.ScreeningResource
 import br.com.hackaton.specialtyscreening.dto.ScreeningDTO;
 import br.com.hackaton.specialtyscreening.dto.mappers.ScreeningMapper;
 import br.com.hackaton.specialtyscreening.enums.ScreeningStatus;
+import br.com.hackaton.specialtyscreening.model.Diagnosis;
 import br.com.hackaton.specialtyscreening.model.Screening;
 import br.com.hackaton.specialtyscreening.model.SpecialistDoctor;
 import br.com.hackaton.specialtyscreening.model.Specialty;
@@ -59,6 +60,22 @@ public class ScreeningServiceImpl extends BaseServiceImpl implements ScreeningSe
                                 findSpecialtyById(screening.getId()),
                                 findDoctorById(specialistId))
                         ));
+        }
+        return null;
+    }
+
+    @Override
+    public ScreeningResource finishedDiagnosis(Long id, Diagnosis diagnosis) {
+        Screening screening = screeningRepository.findById(id).orElse(null);
+        if ( screening != null ) {
+            screening.setStatus(ScreeningStatus.COMPLETED_DIAGNOSIS);
+            screening.setDiagnosis(diagnosis);
+            ScreeningDTO screeningDTO = ScreeningMapper.toDto(screening);
+            return ScreeningMapper.toResourceByModel(
+                    screeningRepository.save(ScreeningMapper.toEntityByDoctor(screeningDTO,
+                            findSpecialtyById(screening.getId()),
+                            findDoctorById(screening.getSpecialty().getId()))
+                    ));
         }
         return null;
     }

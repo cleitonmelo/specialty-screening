@@ -2,8 +2,13 @@ package br.com.hackaton.specialtyscreening.controller;
 
 import br.com.hackaton.specialtyscreening.controller.resources.BaseResource;
 import br.com.hackaton.specialtyscreening.controller.resources.ScreeningResource;
+import br.com.hackaton.specialtyscreening.dto.DiagnosisDTO;
 import br.com.hackaton.specialtyscreening.dto.ScreeningDTO;
+import br.com.hackaton.specialtyscreening.dto.SpecialistDoctorDTO;
+import br.com.hackaton.specialtyscreening.dto.SpecialtyDTO;
 import br.com.hackaton.specialtyscreening.dto.mappers.ScreeningMapper;
+import br.com.hackaton.specialtyscreening.model.Diagnosis;
+import br.com.hackaton.specialtyscreening.service.DiagnosisService;
 import br.com.hackaton.specialtyscreening.service.SpecialistDoctorService;
 import br.com.hackaton.specialtyscreening.service.impl.ScreeningServiceImpl;
 import br.com.hackaton.specialtyscreening.service.impl.SpecialtyServiceImpl;
@@ -31,11 +36,14 @@ public class ScreeningController extends BaseController{
 
     private final SpecialistDoctorService specialistDoctorService;
 
+    private final DiagnosisService diagnosisService;
+
     @Autowired
-    public ScreeningController(ScreeningServiceImpl screeningService, SpecialtyServiceImpl specialtyService, SpecialistDoctorService specialistDoctorService) {
+    public ScreeningController(ScreeningServiceImpl screeningService, SpecialtyServiceImpl specialtyService, SpecialistDoctorService specialistDoctorService, DiagnosisService diagnosisService) {
         this.screeningService = screeningService;
         this.specialtyService = specialtyService;
         this.specialistDoctorService = specialistDoctorService;
+        this.diagnosisService = diagnosisService;
     }
 
     @GetMapping("/{id}")
@@ -44,10 +52,20 @@ public class ScreeningController extends BaseController{
         if ( dto == null ) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok().body(
-                ScreeningMapper.toResource(this.screeningService.get(id),
-                        this.specialtyService.get(dto.specialty()),
-                        this.specialistDoctorService.get(dto.specialistDoctor()))
+
+        SpecialistDoctorDTO specialistDoctorService = null;
+        if ( dto.specialistDoctor() != null ){
+            specialistDoctorService = this.specialistDoctorService.get(dto.specialistDoctor().id());
+        }
+
+        SpecialtyDTO specialty = null;
+        if ( dto.specialty() != null ){
+            specialty = this.specialtyService.get(dto.specialty());
+        }
+
+        return ResponseEntity.ok().body(ScreeningMapper.toResource(this.screeningService.get(id),
+                specialty,
+                specialistDoctorService)
         );
     }
 
@@ -58,14 +76,21 @@ public class ScreeningController extends BaseController{
                     "Especialidade não localizada para efetuar o cadastro!");
         }
 
+        SpecialistDoctorDTO specialistDoctorService = null;
+        if ( screeningDTO.specialistDoctor() != null ){
+            specialistDoctorService = this.specialistDoctorService.get(screeningDTO.specialistDoctor().id());
+        }
+
+        SpecialtyDTO specialty = null;
+        if ( screeningDTO.specialty() != null ){
+            specialty = this.specialtyService.get(screeningDTO.specialty());
+        }
+
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 ScreeningMapper.toResource(
                     this.screeningService.create(screeningDTO),
-                    this.specialtyService.get(screeningDTO.specialty()),
-                    this.specialistDoctorService.get(screeningDTO.specialistDoctor())
-
-            )
-        );
+                        specialty, specialistDoctorService)
+            );
     }
 
     @PutMapping("/{id}")
@@ -86,7 +111,7 @@ public class ScreeningController extends BaseController{
                 ScreeningMapper.toResource(
                         this.screeningService.update(screeningDTO),
                         this.specialtyService.get(dto.specialty()),
-                        this.specialistDoctorService.get(dto.specialistDoctor())
+                        this.specialistDoctorService.get(dto.specialistDoctor().id())
                 )
         );
     }
@@ -121,5 +146,17 @@ public class ScreeningController extends BaseController{
         }
 
         return ResponseEntity.ok().body(resource);
+    }
+
+    @PostMapping("/{id}/diagnosis")
+    public ResponseEntity<BaseResource> diagnosis(@PathVariable("id") Long id,
+                                                  @RequestBody DiagnosisDTO dto) {
+
+        Diagnosis diagnosis = this.diagnosisService.create(dto);
+        if ( diagnosis == null ) {
+            return this.badRequestException(HttpStatus.NOT_FOUND.name(),
+                    "Ocorreu um erro ao criar um diagnostico");
+        }
+        return ResponseEntity.ok().body(this.screeningService.finishedDiagnosis(id, diagnosis));
     }
 }

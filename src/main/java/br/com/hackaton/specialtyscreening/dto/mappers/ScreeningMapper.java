@@ -63,7 +63,7 @@ public class ScreeningMapper implements BaseMapper {
                 .specialistDoctor(specialistDoctorDTO)
                 .status(dto.status().getDescription())
                 .teleCall("http://www.telecall.com.br/iniciar")
-                .diagnosis(dto.diagnosisDTO())
+                .diagnosis(DiagnosisMapper.toResource(dto.diagnosisDTO()))
                 .build();
     }
 
@@ -76,7 +76,8 @@ public class ScreeningMapper implements BaseMapper {
                 .specialistDoctor(screening.getSpecialistDoctor() != null ? SpecialistDoctorMapper.toDto(screening.getSpecialistDoctor()) : null)
                 .status(screening.getStatus().getDescription())
                 .teleCall("http://")
-                .diagnosis(screening.getDiagnosis() != null ? DiagnosisMapper.toDto(screening.getDiagnosis()) : null)
+                .diagnosis(screening.getDiagnosis() != null ?
+                        DiagnosisMapper.toResource(DiagnosisMapper.toDto(screening.getDiagnosis())) : null)
                 .build();
 
     }

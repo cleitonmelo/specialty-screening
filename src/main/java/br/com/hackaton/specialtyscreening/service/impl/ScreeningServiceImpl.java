@@ -5,23 +5,29 @@ import br.com.hackaton.specialtyscreening.dto.ScreeningDTO;
 import br.com.hackaton.specialtyscreening.dto.mappers.ScreeningMapper;
 import br.com.hackaton.specialtyscreening.enums.ScreeningStatus;
 import br.com.hackaton.specialtyscreening.model.Diagnosis;
+import br.com.hackaton.specialtyscreening.model.Exam;
 import br.com.hackaton.specialtyscreening.model.Screening;
 import br.com.hackaton.specialtyscreening.model.SpecialistDoctor;
 import br.com.hackaton.specialtyscreening.model.Specialty;
+import br.com.hackaton.specialtyscreening.repository.ExamRepository;
 import br.com.hackaton.specialtyscreening.repository.ScreeningRepository;
 import br.com.hackaton.specialtyscreening.service.ScreeningService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 public class ScreeningServiceImpl extends BaseServiceImpl implements ScreeningService {
 
     private final ScreeningRepository screeningRepository;
+    private final ExamRepository examRepository;
 
-    public ScreeningServiceImpl(ScreeningRepository screeningRepository) {
+    public ScreeningServiceImpl(ScreeningRepository screeningRepository, ExamRepository examRepository) {
         super();
         this.screeningRepository = screeningRepository;
+        this.examRepository = examRepository;
     }
 
     @Override
@@ -60,6 +66,24 @@ public class ScreeningServiceImpl extends BaseServiceImpl implements ScreeningSe
                                 findSpecialtyById(screening.getId()),
                                 findDoctorById(specialistId))
                         ));
+        }
+        return null;
+    }
+
+    @Override
+    public ScreeningResource associateExam(Long examId, Long id) {
+        Screening screening = screeningRepository.findById(id).orElse(null);
+        Exam exam = examRepository.findById(examId).orElse(null);
+        if ( screening != null && exam != null) {
+
+            if (screening.getExam() == null) {
+                screening.setExam(new ArrayList<Exam>());
+            }
+
+            screening.getExam().add(exam);
+            screening.setStatus(ScreeningStatus.AWAITING_EXAMS);
+            Screening save = screeningRepository.save(screening);
+            return ScreeningMapper.toResourceByModel(save);
         }
         return null;
     }

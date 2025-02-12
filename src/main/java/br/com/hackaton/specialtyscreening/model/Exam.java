@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Builder  //
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -20,6 +20,6 @@ public class Exam {
 
     private String examDescription;
 
-    private boolean isActive = true;
+    private boolean active = true;
 
 }

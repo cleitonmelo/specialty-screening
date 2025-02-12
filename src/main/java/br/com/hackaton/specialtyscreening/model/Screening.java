@@ -4,7 +4,7 @@ import br.com.hackaton.specialtyscreening.enums.ScreeningStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.UUID;
+import java.util.List;
 
 
 @Entity
@@ -30,6 +30,10 @@ public class Screening implements BaseModel{
     @ManyToOne
     @JoinColumn(name = "specialtyId")
     private Specialty specialty;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "exam")
+    private List<Exam> exam;
 
     @Column(nullable = false)
     private ScreeningStatus status;

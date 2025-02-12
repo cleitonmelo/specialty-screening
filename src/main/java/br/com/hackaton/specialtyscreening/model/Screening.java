@@ -19,7 +19,7 @@ public class Screening implements BaseModel{
     private Long id;
 
     @Column(nullable = false)
-    private Long patientCode;
+    private String patientCode;
 
     private String patientName;
 

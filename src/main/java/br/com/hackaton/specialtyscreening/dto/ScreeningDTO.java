@@ -13,7 +13,8 @@ public record ScreeningDTO(
         String patientName,
         @NotNull(message = "Necessário selecionar especialidade.")
         Long specialty,
-        Long specialistDoctor,
-        ScreeningStatus status
+        SpecialistDoctorDTO specialistDoctor,
+        ScreeningStatus status,
+        DiagnosisDTO diagnosisDTO
 )  implements BaseDto {
 }

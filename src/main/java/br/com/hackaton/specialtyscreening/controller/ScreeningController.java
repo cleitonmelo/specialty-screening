@@ -55,7 +55,7 @@ public class ScreeningController extends BaseController{
 
         SpecialistDoctorDTO specialistDoctorService = null;
         if ( dto.specialistDoctor() != null ){
-            specialistDoctorService = this.specialistDoctorService.get(dto.specialistDoctor());
+            specialistDoctorService = this.specialistDoctorService.get(dto.specialistDoctor().id());
         }
 
         SpecialtyDTO specialty = null;
@@ -78,7 +78,7 @@ public class ScreeningController extends BaseController{
 
         SpecialistDoctorDTO specialistDoctorService = null;
         if ( screeningDTO.specialistDoctor() != null ){
-            specialistDoctorService = this.specialistDoctorService.get(screeningDTO.specialistDoctor());
+            specialistDoctorService = this.specialistDoctorService.get(screeningDTO.specialistDoctor().id());
         }
 
         SpecialtyDTO specialty = null;
@@ -111,7 +111,7 @@ public class ScreeningController extends BaseController{
                 ScreeningMapper.toResource(
                         this.screeningService.update(screeningDTO),
                         this.specialtyService.get(dto.specialty()),
-                        this.specialistDoctorService.get(dto.specialistDoctor())
+                        this.specialistDoctorService.get(dto.specialistDoctor().id())
                 )
         );
     }

@@ -1,7 +1,6 @@
 package br.com.hackaton.specialtyscreening.service.impl;
 
 import br.com.hackaton.specialtyscreening.controller.resources.ScreeningResource;
-import br.com.hackaton.specialtyscreening.dto.DiagnosisDTO;
 import br.com.hackaton.specialtyscreening.dto.ScreeningDTO;
 import br.com.hackaton.specialtyscreening.dto.mappers.ScreeningMapper;
 import br.com.hackaton.specialtyscreening.enums.ScreeningStatus;

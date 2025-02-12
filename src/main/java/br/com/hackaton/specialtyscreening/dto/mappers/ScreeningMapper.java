@@ -22,7 +22,7 @@ public class ScreeningMapper implements BaseMapper {
               .id(screening.getId())
               .patientCode(screening.getPatientCode())
               .specialty(screening.getSpecialty().getId())
-              .specialistDoctor(screening.getSpecialistDoctor().getId())
+              .specialistDoctor(null)
               .status(screening.getStatus())
               .build();
     }
@@ -59,6 +59,7 @@ public class ScreeningMapper implements BaseMapper {
                 .specialty(specialtyDTO)
                 .specialistDoctor(specialistDoctorDTO)
                 .status(dto.status().getDescription())
+                .teleCall("http://")
                 .build();
     }
 
@@ -68,9 +69,10 @@ public class ScreeningMapper implements BaseMapper {
                 .patientCode(screening.getPatientCode())
                 .patientName(screening.getPatientName())
                 .specialty(SpecialtyMapper.toDto(screening.getSpecialty()))
-                .specialistDoctor(screening.getSpecialistDoctor() != null ?
-                        SpecialistDoctorMapper.toDto(screening.getSpecialistDoctor()) : null)
+                .specialistDoctor(screening.getSpecialistDoctor() != null ? SpecialistDoctorMapper.toDto(screening.getSpecialistDoctor()) : null)
                 .status(screening.getStatus().getDescription())
+                .teleCall("http://")
+                .diagnosis(screening.getDiagnosis() != null ? DiagnosisMapper.toDto(screening.getDiagnosis()) : null)
                 .build();
 
     }

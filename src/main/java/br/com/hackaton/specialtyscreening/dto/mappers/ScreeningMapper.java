@@ -1,6 +1,7 @@
 package br.com.hackaton.specialtyscreening.dto.mappers;
 
 import br.com.hackaton.specialtyscreening.controller.resources.ScreeningResource;
+import br.com.hackaton.specialtyscreening.dto.PatientDto;
 import br.com.hackaton.specialtyscreening.dto.ScreeningDTO;
 import br.com.hackaton.specialtyscreening.dto.SpecialistDoctorDTO;
 import br.com.hackaton.specialtyscreening.dto.SpecialtyDTO;
@@ -21,6 +22,7 @@ public class ScreeningMapper implements BaseMapper {
       return ScreeningDTO.builder()
               .id(screening.getId())
               .patientCode(screening.getPatientCode())
+              .patientName(screening.getPatientName())
               .specialty(screening.getSpecialty().getId())
               .specialistDoctor(screening.getSpecialistDoctor() != null ?
                       SpecialistDoctorMapper.toDto(screening.getSpecialistDoctor()) : null)
@@ -49,6 +51,7 @@ public class ScreeningMapper implements BaseMapper {
                 .specialty(specialty)
                 .specialistDoctor(specialistDoctor)
                 .status(dto.status())
+                .diagnosis(DiagnosisMapper.toEntity(dto.diagnosisDTO()))
                 .build();
     }
 

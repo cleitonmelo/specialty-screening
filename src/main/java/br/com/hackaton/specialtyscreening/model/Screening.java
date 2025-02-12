@@ -4,9 +4,6 @@ import br.com.hackaton.specialtyscreening.enums.ScreeningStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.UUID;
-
-
 @Entity
 @Builder
 @AllArgsConstructor

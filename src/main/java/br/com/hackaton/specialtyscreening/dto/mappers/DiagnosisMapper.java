@@ -1,5 +1,6 @@
 package br.com.hackaton.specialtyscreening.dto.mappers;
 
+import br.com.hackaton.specialtyscreening.controller.resources.DiagnosisResource;
 import br.com.hackaton.specialtyscreening.controller.resources.ScreeningResource;
 import br.com.hackaton.specialtyscreening.dto.DiagnosisDTO;
 import br.com.hackaton.specialtyscreening.dto.ScreeningDTO;
@@ -30,6 +31,14 @@ public class DiagnosisMapper implements BaseMapper {
         return Diagnosis.builder()
                 .description(dto.description())
                 .status(dto.status())
+                .build();
+    }
+
+    public static DiagnosisResource toResource(DiagnosisDTO dto) {
+        return DiagnosisResource.builder()
+                .status(dto.status().getStatus())
+                .statusHelp(dto.status().getDescription())
+                .description(dto.description())
                 .build();
     }
 }

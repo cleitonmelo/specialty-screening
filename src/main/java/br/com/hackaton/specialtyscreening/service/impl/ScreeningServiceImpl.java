@@ -77,7 +77,7 @@ public class ScreeningServiceImpl extends BaseServiceImpl implements ScreeningSe
         Screening screening = screeningRepository.findById(id).orElse(null);
         if ( screening != null ) {
             screening.setStatus(ScreeningStatus.COMPLETED_DIAGNOSIS);
-            screening.setDiagnosis(diagnosis);
+            //screening.setDiagnosis(diagnosis);
             ScreeningDTO screeningDTO = ScreeningMapper.toDto(screening);
             return ScreeningMapper.toResourceByModel(
                     screeningRepository.save(ScreeningMapper.toEntityByDoctor(screeningDTO,

@@ -51,7 +51,7 @@ public class ScreeningMapper implements BaseMapper {
                 .specialty(specialty)
                 .specialistDoctor(specialistDoctor)
                 .status(dto.status())
-                .diagnosis(DiagnosisMapper.toEntity(dto.diagnosisDTO()))
+                .diagnosis(dto.diagnosisDTO() != null ? DiagnosisMapper.toEntity(dto.diagnosisDTO()) : null)
                 .build();
     }
 

@@ -4,7 +4,6 @@ import br.com.hackaton.specialtyscreening.enums.ScreeningStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
-
 @Entity
 @Builder
 @AllArgsConstructor
@@ -17,7 +16,7 @@ public class Screening implements BaseModel{
     private Long id;
 
     @Column(nullable = false)
-    private Long patientCode;
+    private String patientCode;
 
     private String patientName;
 
@@ -32,4 +31,9 @@ public class Screening implements BaseModel{
     @Column(nullable = false)
     private ScreeningStatus status;
 
+    @OneToOne
+    @JoinColumn(name = "diagnosisId")
+    private Diagnosis diagnosis;
+
+    private String telecall;
 }

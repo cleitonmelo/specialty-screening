@@ -1,6 +1,7 @@
 package br.com.hackaton.specialtyscreening.dto.mappers;
 
 import br.com.hackaton.specialtyscreening.controller.resources.ScreeningResource;
+import br.com.hackaton.specialtyscreening.dto.PatientDto;
 import br.com.hackaton.specialtyscreening.dto.ScreeningDTO;
 import br.com.hackaton.specialtyscreening.dto.SpecialistDoctorDTO;
 import br.com.hackaton.specialtyscreening.dto.SpecialtyDTO;
@@ -21,9 +22,13 @@ public class ScreeningMapper implements BaseMapper {
       return ScreeningDTO.builder()
               .id(screening.getId())
               .patientCode(screening.getPatientCode())
+              .patientName(screening.getPatientName())
               .specialty(screening.getSpecialty().getId())
-              .specialistDoctor(screening.getSpecialistDoctor().getId())
+              .specialistDoctor(screening.getSpecialistDoctor() != null ?
+                      SpecialistDoctorMapper.toDto(screening.getSpecialistDoctor()) : null)
               .status(screening.getStatus())
+              .diagnosisDTO(screening.getDiagnosis() != null ?
+                      DiagnosisMapper.toDto(screening.getDiagnosis()) : null)
               .build();
     }
 
@@ -46,6 +51,7 @@ public class ScreeningMapper implements BaseMapper {
                 .specialty(specialty)
                 .specialistDoctor(specialistDoctor)
                 .status(dto.status())
+                .diagnosis(dto.diagnosisDTO() != null ? DiagnosisMapper.toEntity(dto.diagnosisDTO()) : null)
                 .build();
     }
 
@@ -59,6 +65,8 @@ public class ScreeningMapper implements BaseMapper {
                 .specialty(specialtyDTO)
                 .specialistDoctor(specialistDoctorDTO)
                 .status(dto.status().getDescription())
+                .teleCall("http://www.telecall.com.br/iniciar")
+                .diagnosis(DiagnosisMapper.toResource(dto.diagnosisDTO()))
                 .build();
     }
 
@@ -68,9 +76,11 @@ public class ScreeningMapper implements BaseMapper {
                 .patientCode(screening.getPatientCode())
                 .patientName(screening.getPatientName())
                 .specialty(SpecialtyMapper.toDto(screening.getSpecialty()))
-                .specialistDoctor(screening.getSpecialistDoctor() != null ?
-                        SpecialistDoctorMapper.toDto(screening.getSpecialistDoctor()) : null)
+                .specialistDoctor(screening.getSpecialistDoctor() != null ? SpecialistDoctorMapper.toDto(screening.getSpecialistDoctor()) : null)
                 .status(screening.getStatus().getDescription())
+                .teleCall("http://")
+                .diagnosis(screening.getDiagnosis() != null ?
+                        DiagnosisMapper.toResource(DiagnosisMapper.toDto(screening.getDiagnosis())) : null)
                 .build();
 
     }

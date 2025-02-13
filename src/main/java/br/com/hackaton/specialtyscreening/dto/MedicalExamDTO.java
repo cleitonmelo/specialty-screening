@@ -1,6 +1,5 @@
 package br.com.hackaton.specialtyscreening.dto;
 
-import br.com.hackaton.specialtyscreening.enums.ScreeningStatus;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 

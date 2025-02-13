@@ -1,9 +1,14 @@
 package br.com.hackaton.specialtyscreening.model;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
-public class MedicalExam {
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter @Setter
+public class MedicalExam implements BaseModel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -1,6 +1,5 @@
 package br.com.hackaton.specialtyscreening.controller.resources;
 
-import br.com.hackaton.specialtyscreening.dto.DiagnosisDTO;
 import br.com.hackaton.specialtyscreening.dto.SpecialistDoctorDTO;
 import br.com.hackaton.specialtyscreening.dto.SpecialtyDTO;
 import lombok.Builder;

@@ -1,7 +1,6 @@
 package br.com.hackaton.specialtyscreening.service;
 
 import br.com.hackaton.specialtyscreening.controller.resources.ScreeningResource;
-import br.com.hackaton.specialtyscreening.dto.DiagnosisDTO;
 import br.com.hackaton.specialtyscreening.dto.ScreeningDTO;
 import br.com.hackaton.specialtyscreening.model.Diagnosis;
 import org.springframework.data.domain.Page;

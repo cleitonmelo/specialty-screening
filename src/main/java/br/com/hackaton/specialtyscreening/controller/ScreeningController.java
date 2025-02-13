@@ -2,14 +2,10 @@ package br.com.hackaton.specialtyscreening.controller;
 
 import br.com.hackaton.specialtyscreening.controller.resources.BaseResource;
 import br.com.hackaton.specialtyscreening.controller.resources.ScreeningResource;
-import br.com.hackaton.specialtyscreening.dto.DiagnosisDTO;
-import br.com.hackaton.specialtyscreening.dto.ScreeningDTO;
-import br.com.hackaton.specialtyscreening.dto.SpecialistDoctorDTO;
-import br.com.hackaton.specialtyscreening.dto.SpecialtyDTO;
+import br.com.hackaton.specialtyscreening.dto.*;
 import br.com.hackaton.specialtyscreening.dto.mappers.ScreeningMapper;
 import br.com.hackaton.specialtyscreening.model.Diagnosis;
-import br.com.hackaton.specialtyscreening.service.DiagnosisService;
-import br.com.hackaton.specialtyscreening.service.SpecialistDoctorService;
+import br.com.hackaton.specialtyscreening.service.*;
 import br.com.hackaton.specialtyscreening.service.impl.ScreeningServiceImpl;
 import br.com.hackaton.specialtyscreening.service.impl.SpecialtyServiceImpl;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -30,16 +26,20 @@ import org.springframework.web.bind.annotation.*;
         description = "API para gerenciamento de cadastro de triagem de especialidades")
 public class ScreeningController extends BaseController{
 
-    private final ScreeningServiceImpl screeningService;
+    private final ScreeningService screeningService;
 
-    private final SpecialtyServiceImpl specialtyService;
+    private final SpecialtyService specialtyService;
 
     private final SpecialistDoctorService specialistDoctorService;
 
     private final DiagnosisService diagnosisService;
 
+
     @Autowired
-    public ScreeningController(ScreeningServiceImpl screeningService, SpecialtyServiceImpl specialtyService, SpecialistDoctorService specialistDoctorService, DiagnosisService diagnosisService) {
+    public ScreeningController(ScreeningServiceImpl screeningService,
+                               SpecialtyServiceImpl specialtyService,
+                               SpecialistDoctorService specialistDoctorService,
+                               DiagnosisService diagnosisService) {
         this.screeningService = screeningService;
         this.specialtyService = specialtyService;
         this.specialistDoctorService = specialistDoctorService;

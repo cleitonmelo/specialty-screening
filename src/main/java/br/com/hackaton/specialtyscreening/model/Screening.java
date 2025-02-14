@@ -31,7 +31,7 @@ public class Screening implements BaseModel{
     @Column(nullable = false)
     private ScreeningStatus status;
 
-    @OneToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "diagnosisId")
     private Diagnosis diagnosis;
 

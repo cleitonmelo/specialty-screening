@@ -1,7 +1,6 @@
 package br.com.hackaton.specialtyscreening.dto.mappers;
 
 import br.com.hackaton.specialtyscreening.controller.resources.ScreeningResource;
-import br.com.hackaton.specialtyscreening.dto.PatientDto;
 import br.com.hackaton.specialtyscreening.dto.ScreeningDTO;
 import br.com.hackaton.specialtyscreening.dto.SpecialistDoctorDTO;
 import br.com.hackaton.specialtyscreening.dto.SpecialtyDTO;
@@ -65,8 +64,8 @@ public class ScreeningMapper implements BaseMapper {
                 .specialty(specialtyDTO)
                 .specialistDoctor(specialistDoctorDTO)
                 .status(dto.status().getDescription())
-                .teleCall("http://www.telecall.com.br/iniciar")
-                .diagnosis(DiagnosisMapper.toResource(dto.diagnosisDTO()))
+                .teleCall(null)
+                .diagnosis(dto.diagnosisDTO() != null ? DiagnosisMapper.toResource(dto.diagnosisDTO()) : null)
                 .build();
     }
 
@@ -78,7 +77,7 @@ public class ScreeningMapper implements BaseMapper {
                 .specialty(SpecialtyMapper.toDto(screening.getSpecialty()))
                 .specialistDoctor(screening.getSpecialistDoctor() != null ? SpecialistDoctorMapper.toDto(screening.getSpecialistDoctor()) : null)
                 .status(screening.getStatus().getDescription())
-                .teleCall("http://")
+                .teleCall(null)
                 .diagnosis(screening.getDiagnosis() != null ?
                         DiagnosisMapper.toResource(DiagnosisMapper.toDto(screening.getDiagnosis())) : null)
                 .build();

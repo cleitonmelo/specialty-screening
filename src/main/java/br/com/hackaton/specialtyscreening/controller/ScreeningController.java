@@ -118,12 +118,17 @@ public class ScreeningController extends BaseController{
 
     @GetMapping
     public ResponseEntity<Page<ScreeningResource>> findScreeningBySpecialtyCode(
-            @RequestParam("specialty_id") Long specialtyId,
+            @RequestParam(value = "specialty_id", required = false) Long specialtyId,
             @ParameterObject
             @PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
-         return ResponseEntity.ok().body(
-                 this.screeningService.findAllBySpecialtyCode(specialtyId,pageable)
-         );
+        if ( specialtyId != null ) {
+            return ResponseEntity.ok().body(
+                    this.screeningService.findAllBySpecialtyCode(specialtyId,pageable)
+            );
+        }
+        return ResponseEntity.ok().body(
+                this.screeningService.findAll(pageable)
+        );
     }
 
     @PutMapping("/{id}/associateSpecialists/{specialistId}")

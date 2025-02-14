@@ -1,7 +1,8 @@
 package br.com.hackaton.specialtyscreening.service.impl;
 
+import br.com.hackaton.specialtyscreening.controller.resources.BaseResource;
 import br.com.hackaton.specialtyscreening.controller.resources.ScreeningResource;
-import br.com.hackaton.specialtyscreening.dto.PatientDto;
+import br.com.hackaton.specialtyscreening.dto.PatientDTO;
 import br.com.hackaton.specialtyscreening.dto.ScreeningDTO;
 import br.com.hackaton.specialtyscreening.dto.mappers.ScreeningMapper;
 import br.com.hackaton.specialtyscreening.enums.ScreeningStatus;
@@ -37,7 +38,7 @@ public class ScreeningServiceImpl extends BaseServiceImpl implements ScreeningSe
         if ( screening.getStatus() == null ) {
             screening.setStatus(ScreeningStatus.AWATING_SPECIALIST);
         }
-        PatientDto patientDto = this.patientService.getPatientInfo(screeningDTO.patientCode());
+        PatientDTO patientDto = this.patientService.getPatientInfo(screeningDTO.patientCode());
         screening.setPatientName(patientDto.getName());
 
         return ScreeningMapper.toDto(screeningRepository.save(screening));
@@ -77,7 +78,7 @@ public class ScreeningServiceImpl extends BaseServiceImpl implements ScreeningSe
         Screening screening = screeningRepository.findById(id).orElse(null);
         if ( screening != null ) {
             screening.setStatus(ScreeningStatus.COMPLETED_DIAGNOSIS);
-            //screening.setDiagnosis(diagnosis);
+            screening.setDiagnosis(diagnosis);
             ScreeningDTO screeningDTO = ScreeningMapper.toDto(screening);
             return ScreeningMapper.toResourceByModel(
                     screeningRepository.save(ScreeningMapper.toEntityByDoctor(screeningDTO,
@@ -86,6 +87,12 @@ public class ScreeningServiceImpl extends BaseServiceImpl implements ScreeningSe
                     ));
         }
         return null;
+    }
+
+    @Override
+    public Page<ScreeningResource> findAll(Pageable pageable) {
+        Page<Screening> screenings = screeningRepository.findAll(pageable);
+        return screenings.map(ScreeningMapper::toResourceByModel);
     }
 
     @Override

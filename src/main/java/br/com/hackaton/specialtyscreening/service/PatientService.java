@@ -1,8 +1,8 @@
 package br.com.hackaton.specialtyscreening.service;
 
-import br.com.hackaton.specialtyscreening.dto.PatientDto;
+import br.com.hackaton.specialtyscreening.dto.PatientDTO;
 
 public interface PatientService {
 
-    PatientDto getPatientInfo(String patientCode);
+    PatientDTO getPatientInfo(String patientCode);
 }

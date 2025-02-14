@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 
 public abstract class BaseController {
 
-    public ResponseEntity<BaseResource> badRequestException(String httpStatusName,
+   public ResponseEntity<BaseResource> badRequestException(String httpStatusName,
                                                             String message) {
         return ResponseEntity.badRequest().body(ExceptionResource.builder()
                 .error(httpStatusName)

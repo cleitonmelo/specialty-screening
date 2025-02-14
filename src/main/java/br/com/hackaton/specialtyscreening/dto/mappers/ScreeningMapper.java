@@ -21,6 +21,7 @@ public class ScreeningMapper implements BaseMapper {
       return ScreeningDTO.builder()
               .id(screening.getId())
               .patientCode(screening.getPatientCode())
+              .patientName(screening.getPatientName())
               .specialty(screening.getSpecialty().getId())
               .specialistDoctor(screening.getSpecialistDoctor() != null ?
                       SpecialistDoctorMapper.toDto(screening.getSpecialistDoctor()) : null)
@@ -49,6 +50,7 @@ public class ScreeningMapper implements BaseMapper {
                 .specialty(specialty)
                 .specialistDoctor(specialistDoctor)
                 .status(dto.status())
+                .diagnosis(dto.diagnosisDTO() != null ? DiagnosisMapper.toEntity(dto.diagnosisDTO()) : null)
                 .build();
     }
 
@@ -62,8 +64,8 @@ public class ScreeningMapper implements BaseMapper {
                 .specialty(specialtyDTO)
                 .specialistDoctor(specialistDoctorDTO)
                 .status(dto.status().getDescription())
-                .teleCall("http://www.telecall.com.br/iniciar")
-                .diagnosis(DiagnosisMapper.toResource(dto.diagnosisDTO()))
+                .teleCall(null)
+                .diagnosis(dto.diagnosisDTO() != null ? DiagnosisMapper.toResource(dto.diagnosisDTO()) : null)
                 .build();
     }
 
@@ -75,7 +77,7 @@ public class ScreeningMapper implements BaseMapper {
                 .specialty(SpecialtyMapper.toDto(screening.getSpecialty()))
                 .specialistDoctor(screening.getSpecialistDoctor() != null ? SpecialistDoctorMapper.toDto(screening.getSpecialistDoctor()) : null)
                 .status(screening.getStatus().getDescription())
-                .teleCall("http://")
+                .teleCall(null)
                 .diagnosis(screening.getDiagnosis() != null ?
                         DiagnosisMapper.toResource(DiagnosisMapper.toDto(screening.getDiagnosis())) : null)
                 .build();

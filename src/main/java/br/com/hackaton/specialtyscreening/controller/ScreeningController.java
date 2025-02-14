@@ -2,10 +2,7 @@ package br.com.hackaton.specialtyscreening.controller;
 
 import br.com.hackaton.specialtyscreening.controller.resources.BaseResource;
 import br.com.hackaton.specialtyscreening.controller.resources.ScreeningResource;
-import br.com.hackaton.specialtyscreening.dto.DiagnosisDTO;
-import br.com.hackaton.specialtyscreening.dto.ScreeningDTO;
-import br.com.hackaton.specialtyscreening.dto.SpecialistDoctorDTO;
-import br.com.hackaton.specialtyscreening.dto.SpecialtyDTO;
+import br.com.hackaton.specialtyscreening.dto.*;
 import br.com.hackaton.specialtyscreening.dto.mappers.ScreeningMapper;
 import br.com.hackaton.specialtyscreening.model.Diagnosis;
 import br.com.hackaton.specialtyscreening.model.Exam;
@@ -34,9 +31,9 @@ import java.util.Optional;
         description = "API para gerenciamento de cadastro de triagem de especialidades")
 public class ScreeningController extends BaseController{
 
-    private final ScreeningServiceImpl screeningService;
+    private final ScreeningService screeningService;
 
-    private final SpecialtyServiceImpl specialtyService;
+    private final SpecialtyService specialtyService;
 
     private final SpecialistDoctorService specialistDoctorService;
 
@@ -125,12 +122,17 @@ public class ScreeningController extends BaseController{
 
     @GetMapping
     public ResponseEntity<Page<ScreeningResource>> findScreeningBySpecialtyCode(
-            @RequestParam("specialty_id") Long specialtyId,
+            @RequestParam(value = "specialty_id", required = false) Long specialtyId,
             @ParameterObject
             @PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
-         return ResponseEntity.ok().body(
-                 this.screeningService.findAllBySpecialtyCode(specialtyId,pageable)
-         );
+        if ( specialtyId != null ) {
+            return ResponseEntity.ok().body(
+                    this.screeningService.findAllBySpecialtyCode(specialtyId,pageable)
+            );
+        }
+        return ResponseEntity.ok().body(
+                this.screeningService.findAll(pageable)
+        );
     }
 
     @PutMapping("/{id}/associateSpecialists/{specialistId}")

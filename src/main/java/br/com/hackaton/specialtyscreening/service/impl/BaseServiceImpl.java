@@ -17,7 +17,6 @@ public abstract class BaseServiceImpl implements BaseService {
     @Autowired
     private SpecialistDoctorRepository specialistDoctorRepository;
 
-
     @Override
     public boolean isSpecialtyExists(Long specialtyId) {
         Specialty specialty = specialtyRepository.findById(specialtyId).orElse(null);

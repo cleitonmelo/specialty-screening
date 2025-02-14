@@ -1,15 +1,9 @@
 package br.com.hackaton.specialtyscreening.dto.mappers;
 
 import br.com.hackaton.specialtyscreening.controller.resources.DiagnosisResource;
-import br.com.hackaton.specialtyscreening.controller.resources.ScreeningResource;
 import br.com.hackaton.specialtyscreening.dto.DiagnosisDTO;
-import br.com.hackaton.specialtyscreening.dto.ScreeningDTO;
-import br.com.hackaton.specialtyscreening.dto.SpecialistDoctorDTO;
-import br.com.hackaton.specialtyscreening.dto.SpecialtyDTO;
+import br.com.hackaton.specialtyscreening.dto.DiagnosisStatusDTO;
 import br.com.hackaton.specialtyscreening.model.Diagnosis;
-import br.com.hackaton.specialtyscreening.model.Screening;
-import br.com.hackaton.specialtyscreening.model.SpecialistDoctor;
-import br.com.hackaton.specialtyscreening.model.Specialty;
 import lombok.Builder;
 
 
@@ -36,8 +30,7 @@ public class DiagnosisMapper implements BaseMapper {
 
     public static DiagnosisResource toResource(DiagnosisDTO dto) {
         return DiagnosisResource.builder()
-                .status(dto.status().getStatus())
-                .statusHelp(dto.status().getDescription())
+                .status(dto.status() != null ? DiagnosisStatusMapper.toDto(dto.status()) : null)
                 .description(dto.description())
                 .build();
     }

@@ -1,6 +1,8 @@
 package br.com.hackaton.specialtyscreening.service.impl;
 
+import br.com.hackaton.specialtyscreening.controller.resources.BaseResource;
 import br.com.hackaton.specialtyscreening.controller.resources.ScreeningResource;
+import br.com.hackaton.specialtyscreening.dto.PatientDTO;
 import br.com.hackaton.specialtyscreening.dto.ScreeningDTO;
 import br.com.hackaton.specialtyscreening.dto.mappers.ScreeningMapper;
 import br.com.hackaton.specialtyscreening.enums.ScreeningStatus;
@@ -11,6 +13,7 @@ import br.com.hackaton.specialtyscreening.model.SpecialistDoctor;
 import br.com.hackaton.specialtyscreening.model.Specialty;
 import br.com.hackaton.specialtyscreening.repository.ExamRepository;
 import br.com.hackaton.specialtyscreening.repository.ScreeningRepository;
+import br.com.hackaton.specialtyscreening.service.PatientService;
 import br.com.hackaton.specialtyscreening.service.ScreeningService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,9 +27,12 @@ public class ScreeningServiceImpl extends BaseServiceImpl implements ScreeningSe
     private final ScreeningRepository screeningRepository;
     private final ExamRepository examRepository;
 
-    public ScreeningServiceImpl(ScreeningRepository screeningRepository, ExamRepository examRepository) {
+    private final PatientService patientService;
+
+    public ScreeningServiceImpl(ScreeningRepository screeningRepository, PatientService patientService, ExamRepository examRepository) {
         super();
         this.screeningRepository = screeningRepository;
+        this.patientService = patientService;
         this.examRepository = examRepository;
     }
 
@@ -38,6 +44,9 @@ public class ScreeningServiceImpl extends BaseServiceImpl implements ScreeningSe
         if ( screening.getStatus() == null ) {
             screening.setStatus(ScreeningStatus.AWATING_SPECIALIST);
         }
+        PatientDTO patientDto = this.patientService.getPatientInfo(screeningDTO.patientCode());
+        screening.setPatientName(patientDto.getName());
+
         return ScreeningMapper.toDto(screeningRepository.save(screening));
     }
 
@@ -63,7 +72,7 @@ public class ScreeningServiceImpl extends BaseServiceImpl implements ScreeningSe
             ScreeningDTO screeningDTO = ScreeningMapper.toDto(screening);
             return ScreeningMapper.toResourceByModel(
                         screeningRepository.save(ScreeningMapper.toEntityByDoctor(screeningDTO,
-                                findSpecialtyById(screening.getId()),
+                                findSpecialtyById(screening.getSpecialty().getId()),
                                 findDoctorById(specialistId))
                         ));
         }
@@ -97,11 +106,17 @@ public class ScreeningServiceImpl extends BaseServiceImpl implements ScreeningSe
             ScreeningDTO screeningDTO = ScreeningMapper.toDto(screening);
             return ScreeningMapper.toResourceByModel(
                     screeningRepository.save(ScreeningMapper.toEntityByDoctor(screeningDTO,
-                            findSpecialtyById(screening.getId()),
+                            findSpecialtyById(screening.getSpecialty().getId()),
                             findDoctorById(screening.getSpecialty().getId()))
                     ));
         }
         return null;
+    }
+
+    @Override
+    public Page<ScreeningResource> findAll(Pageable pageable) {
+        Page<Screening> screenings = screeningRepository.findAll(pageable);
+        return screenings.map(ScreeningMapper::toResourceByModel);
     }
 
     @Override

@@ -32,7 +32,6 @@ public class Screening implements BaseModel{
     private Specialty specialty;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "exam")
     private List<Exam> exam;
 
     @Column(nullable = false)

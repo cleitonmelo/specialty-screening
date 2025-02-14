@@ -1,5 +1,6 @@
 package br.com.hackaton.specialtyscreening.service;
 
+import br.com.hackaton.specialtyscreening.controller.resources.BaseResource;
 import br.com.hackaton.specialtyscreening.controller.resources.ScreeningResource;
 import br.com.hackaton.specialtyscreening.dto.ScreeningDTO;
 import br.com.hackaton.specialtyscreening.model.Diagnosis;
@@ -19,4 +20,6 @@ public interface ScreeningService extends BaseService{
     ScreeningResource associateSpecialist(Long specialistId, Long id);
 
     ScreeningResource finishedDiagnosis(Long id, Diagnosis diagnosis);
+
+    Page<ScreeningResource> findAll(Pageable pageable);
 }

@@ -5,7 +5,7 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
-public class PatientDto {
+public class PatientDTO {
     private String id;
     private String name;
     private String cpf;
@@ -13,5 +13,5 @@ public class PatientDto {
     private String birthDate;
     private String email;
     private String phone;
-    private List<PatientAddressesDto> addresses;
+    private List<PatientAddressesDTO> addresses;
 }

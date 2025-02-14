@@ -1,11 +1,11 @@
 package br.com.hackaton.specialtyscreening.controller.resources;
 
+import br.com.hackaton.specialtyscreening.dto.DiagnosisStatusDTO;
 import lombok.Builder;
 
 @Builder
 public record DiagnosisResource(
-        String status,
-        String statusHelp,
+        DiagnosisStatusDTO status,
         String description
 ) implements BaseResource{
 }

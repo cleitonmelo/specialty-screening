@@ -3,7 +3,7 @@ package br.com.hackaton.specialtyscreening.dto;
 import lombok.Builder;
 
 @Builder
-public class PatientAddressesDto {
+public class PatientAddressesDTO {
     private String street;
     private String number;
     private String complement;

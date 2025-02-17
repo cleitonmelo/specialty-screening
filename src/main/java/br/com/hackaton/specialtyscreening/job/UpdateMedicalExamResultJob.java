@@ -9,7 +9,7 @@ import br.com.hackaton.specialtyscreening.service.MedicalExamService;
 
 @Slf4j
 @Component
-public class UpdateMedicalExamResultJob {
+public class UpdateMedicalExamResultJob implements BaseJob{
 
     @Autowired
     private MedicalExamService medicalExamService;

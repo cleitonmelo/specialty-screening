@@ -5,7 +5,12 @@ import br.com.hackaton.specialtyscreening.controller.resources.ScreeningResource
 import br.com.hackaton.specialtyscreening.dto.*;
 import br.com.hackaton.specialtyscreening.dto.mappers.ScreeningMapper;
 import br.com.hackaton.specialtyscreening.model.Diagnosis;
-import br.com.hackaton.specialtyscreening.service.*;
+import br.com.hackaton.specialtyscreening.model.Exam;
+import br.com.hackaton.specialtyscreening.service.DiagnosisService;
+import br.com.hackaton.specialtyscreening.service.ExamService;
+import br.com.hackaton.specialtyscreening.service.ScreeningService;
+import br.com.hackaton.specialtyscreening.service.SpecialistDoctorService;
+import br.com.hackaton.specialtyscreening.service.SpecialtyService;
 import br.com.hackaton.specialtyscreening.service.impl.ScreeningServiceImpl;
 import br.com.hackaton.specialtyscreening.service.impl.SpecialtyServiceImpl;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -19,6 +24,8 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/screening")
@@ -34,16 +41,15 @@ public class ScreeningController extends BaseController{
 
     private final DiagnosisService diagnosisService;
 
+    private final ExamService examService;
 
     @Autowired
-    public ScreeningController(ScreeningServiceImpl screeningService,
-                               SpecialtyServiceImpl specialtyService,
-                               SpecialistDoctorService specialistDoctorService,
-                               DiagnosisService diagnosisService) {
+    public ScreeningController(ScreeningServiceImpl screeningService, SpecialtyServiceImpl specialtyService, SpecialistDoctorService specialistDoctorService, DiagnosisService diagnosisService, ExamService examService) {
         this.screeningService = screeningService;
         this.specialtyService = specialtyService;
         this.specialistDoctorService = specialistDoctorService;
         this.diagnosisService = diagnosisService;
+        this.examService = examService;
     }
 
     @GetMapping("/{id}")
@@ -146,6 +152,25 @@ public class ScreeningController extends BaseController{
         }
 
         ScreeningResource resource = this.screeningService.associateSpecialist(specilistId, id);
+        if ( resource == null ) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok().body(resource);
+    }
+
+    @PutMapping("/{id}/associateExam/{examId}")
+    public ResponseEntity<BaseResource> associateExams(@PathVariable("id") Long id,
+                                                             @PathVariable("examId") Long examId) {
+
+        Optional<Exam> examOptional = this.examService.findById(examId);
+
+        if ( examOptional.isEmpty() )  {
+            return this.badRequestException(HttpStatus.NOT_FOUND.name(),
+                    "Exame não localizado para associar ao formulário de triagem");
+        }
+
+        ScreeningResource resource = this.screeningService.associateExam(examId, id);
         if ( resource == null ) {
             return ResponseEntity.notFound().build();
         }

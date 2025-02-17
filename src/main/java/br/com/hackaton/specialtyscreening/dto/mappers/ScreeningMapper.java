@@ -78,6 +78,7 @@ public class ScreeningMapper implements BaseMapper {
                 .specialistDoctor(screening.getSpecialistDoctor() != null ? SpecialistDoctorMapper.toDto(screening.getSpecialistDoctor()) : null)
                 .status(screening.getStatus().getDescription())
                 .teleCall(null)
+                .medicalExams(screening.getExam())
                 .diagnosis(screening.getDiagnosis() != null ?
                         DiagnosisMapper.toResource(DiagnosisMapper.toDto(screening.getDiagnosis())) : null)
                 .build();

@@ -19,6 +19,8 @@ public interface ScreeningService extends BaseService{
 
     ScreeningResource associateSpecialist(Long specialistId, Long id);
 
+    ScreeningResource associateExam(Long examId, Long id);
+
     ScreeningResource finishedDiagnosis(Long id, Diagnosis diagnosis);
 
     Page<ScreeningResource> findAll(Pageable pageable);

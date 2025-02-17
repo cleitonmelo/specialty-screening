@@ -20,6 +20,4 @@ public class Exam {
 
     private String examDescription;
 
-    private boolean active = true;
-
 }

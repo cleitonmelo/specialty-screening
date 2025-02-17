@@ -10,5 +10,4 @@ import lombok.Setter;
 public class ExamDTORequest {
     private String examName;
     private String examDescription;
-    private boolean active;
 }

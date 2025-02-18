@@ -38,6 +38,7 @@ public class ScreeningMapper implements BaseMapper {
         return Screening.builder()
                 .id(dto.id())
                 .patientCode(dto.patientCode())
+                .patientName(dto.patientName())
                 .specialty(specialty)
                 .status(dto.status())
                 .build();
@@ -49,6 +50,7 @@ public class ScreeningMapper implements BaseMapper {
         return Screening.builder()
                 .id(dto.id())
                 .patientCode(dto.patientCode())
+                .patientName(dto.patientName())
                 .specialty(specialty)
                 .specialistDoctor(specialistDoctor)
                 .status(dto.status())

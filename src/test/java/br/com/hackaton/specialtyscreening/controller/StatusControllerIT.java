@@ -13,10 +13,10 @@ import org.springframework.http.MediaType;
 import static io.restassured.RestAssured.given;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class StatusControllerIT extends BaseTestIT {
+class StatusControllerIT extends BaseTestIT {
 
     public StatusControllerIT() {
-        this.URI = "status";
+        this.setURI("status");
     }
 
     @LocalServerPort

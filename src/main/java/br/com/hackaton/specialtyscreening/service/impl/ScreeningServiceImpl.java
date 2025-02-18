@@ -106,7 +106,7 @@ public class ScreeningServiceImpl extends BaseServiceImpl implements ScreeningSe
             return ScreeningMapper.toResourceByModel(
                     screeningRepository.save(ScreeningMapper.toEntityByDoctor(screeningDTO,
                             findSpecialtyById(screening.getSpecialty().getId()),
-                            findDoctorById(screening.getSpecialty().getId()))
+                            findDoctorById(screening.getSpecialistDoctor().getId()))
                     ));
         }
         return null;

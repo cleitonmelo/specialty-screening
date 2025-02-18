@@ -4,13 +4,17 @@ import br.com.hackaton.specialtyscreening.dto.ScreeningDTO;
 
 public abstract class BaseTestIT {
 
-    public String URI;
+    private String uri;
 
     public static final String BASE_API = "/api/v1";
 
+    public void setURI(String value){
+        this.uri = value;
+    }
+
     public String getBaseUri()
     {
-        return BASE_API + "/" + URI;
+        return BASE_API + "/" + this.uri;
     }
 
     public static ScreeningDTO getScreeningDTOForTest(){

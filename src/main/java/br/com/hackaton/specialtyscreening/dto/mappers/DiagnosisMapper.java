@@ -2,7 +2,6 @@ package br.com.hackaton.specialtyscreening.dto.mappers;
 
 import br.com.hackaton.specialtyscreening.controller.resources.DiagnosisResource;
 import br.com.hackaton.specialtyscreening.dto.DiagnosisDTO;
-import br.com.hackaton.specialtyscreening.dto.DiagnosisStatusDTO;
 import br.com.hackaton.specialtyscreening.model.Diagnosis;
 import lombok.Builder;
 

@@ -1,6 +1,5 @@
 package br.com.hackaton.specialtyscreening.service.impl;
 
-import br.com.hackaton.specialtyscreening.controller.resources.BaseResource;
 import br.com.hackaton.specialtyscreening.controller.resources.ScreeningResource;
 import br.com.hackaton.specialtyscreening.dto.PatientDTO;
 import br.com.hackaton.specialtyscreening.dto.ScreeningDTO;
@@ -107,7 +106,7 @@ public class ScreeningServiceImpl extends BaseServiceImpl implements ScreeningSe
             return ScreeningMapper.toResourceByModel(
                     screeningRepository.save(ScreeningMapper.toEntityByDoctor(screeningDTO,
                             findSpecialtyById(screening.getSpecialty().getId()),
-                            findDoctorById(screening.getSpecialty().getId()))
+                            findDoctorById(screening.getSpecialistDoctor().getId()))
                     ));
         }
         return null;

@@ -13,10 +13,10 @@ import org.springframework.http.MediaType;
 import static io.restassured.RestAssured.given;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class ScreeningContollerIT extends BaseTestIT {
+class ScreeningContollerIT extends BaseTestIT {
 
     public ScreeningContollerIT() {
-        this.URI = "screening";
+        this.setURI("screening");
     }
 
     @LocalServerPort

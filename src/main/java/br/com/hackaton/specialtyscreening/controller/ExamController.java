@@ -3,6 +3,7 @@ package br.com.hackaton.specialtyscreening.controller;
 import br.com.hackaton.specialtyscreening.dto.ExamDTORequest;
 import br.com.hackaton.specialtyscreening.model.Exam;
 import br.com.hackaton.specialtyscreening.service.ExamService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,10 +16,11 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/exam")
+@RequiredArgsConstructor
 public class ExamController {
 
     @Autowired
-    private ExamService examService;
+    private final ExamService examService;
 
     @PostMapping
     public ResponseEntity<Exam> createExam(@RequestBody ExamDTORequest examDTORequest){

@@ -1,6 +1,5 @@
 package br.com.hackaton.specialtyscreening.service.impl;
 
-import br.com.hackaton.specialtyscreening.controller.resources.BaseResource;
 import br.com.hackaton.specialtyscreening.controller.resources.ScreeningResource;
 import br.com.hackaton.specialtyscreening.dto.PatientDTO;
 import br.com.hackaton.specialtyscreening.dto.ScreeningDTO;

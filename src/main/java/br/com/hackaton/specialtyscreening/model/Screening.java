@@ -41,5 +41,6 @@ public class Screening implements BaseModel{
     @JoinColumn(name = "diagnosisId")
     private Diagnosis diagnosis;
 
-    private String telecall;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Telecall telecall;
 }

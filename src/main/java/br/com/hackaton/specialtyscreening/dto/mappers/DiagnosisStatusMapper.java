@@ -14,6 +14,7 @@ public class DiagnosisStatusMapper implements BaseMapper {
 
     public static DiagnosisStatusDTO toDto(DiagnosisStatus diagnosisStatus) {
       return DiagnosisStatusDTO.builder()
+              .id(diagnosisStatus.name())
               .name(diagnosisStatus.getStatus())
               .meaning(diagnosisStatus.getDescription())
               .build();

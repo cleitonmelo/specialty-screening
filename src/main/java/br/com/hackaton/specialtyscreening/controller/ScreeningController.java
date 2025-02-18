@@ -59,19 +59,10 @@ public class ScreeningController extends BaseController{
             return ResponseEntity.notFound().build();
         }
 
-        SpecialistDoctorDTO specialistDoctorService = null;
-        if ( dto.specialistDoctor() != null ){
-            specialistDoctorService = this.specialistDoctorService.get(dto.specialistDoctor().id());
-        }
-
-        SpecialtyDTO specialty = null;
-        if ( dto.specialty() != null ){
-            specialty = this.specialtyService.get(dto.specialty());
-        }
-
         return ResponseEntity.ok().body(ScreeningMapper.toResource(this.screeningService.get(id),
-                specialty,
-                specialistDoctorService)
+                dto.specialty() != null ? this.specialtyService.get(dto.specialty()) : null,
+                dto.specialistDoctor() != null ?
+                        this.specialistDoctorService.get(dto.specialistDoctor().id()) : null)
         );
     }
 
@@ -82,20 +73,12 @@ public class ScreeningController extends BaseController{
                     "Especialidade não localizada para efetuar o cadastro!");
         }
 
-        SpecialistDoctorDTO specialistDoctorService = null;
-        if ( screeningDTO.specialistDoctor() != null ){
-            specialistDoctorService = this.specialistDoctorService.get(screeningDTO.specialistDoctor().id());
-        }
-
-        SpecialtyDTO specialty = null;
-        if ( screeningDTO.specialty() != null ){
-            specialty = this.specialtyService.get(screeningDTO.specialty());
-        }
-
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 ScreeningMapper.toResource(
                     this.screeningService.create(screeningDTO),
-                        specialty, specialistDoctorService)
+                        screeningDTO.specialty() != null ? this.specialtyService.get(screeningDTO.specialty()) : null,
+                        screeningDTO.specialistDoctor() != null ?
+                                this.specialistDoctorService.get(screeningDTO.specialistDoctor().id()) : null)
             );
     }
 

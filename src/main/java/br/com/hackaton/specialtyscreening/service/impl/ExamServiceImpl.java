@@ -1,6 +1,8 @@
 package br.com.hackaton.specialtyscreening.service.impl;
 
+import br.com.hackaton.specialtyscreening.dto.ExamDTO;
 import br.com.hackaton.specialtyscreening.dto.ExamDTORequest;
+import br.com.hackaton.specialtyscreening.dto.mappers.ExamMapper;
 import br.com.hackaton.specialtyscreening.model.Exam;
 import br.com.hackaton.specialtyscreening.repository.ExamRepository;
 import br.com.hackaton.specialtyscreening.service.ExamService;
@@ -19,32 +21,32 @@ public class ExamServiceImpl implements ExamService {
     private ExamRepository examRepository;
 
     @Override
-    public Exam create(ExamDTORequest examDTORequest) {
+    public ExamDTO create(ExamDTORequest examDTORequest) {
         Exam exam = new Exam();
         BeanUtils.copyProperties(examDTORequest, exam);
-        return examRepository.save(exam);
+        return ExamMapper.toDto(examRepository.save(exam));
     }
 
     @Override
-    public Page<Exam> findAll(Pageable pageable) {
-        return examRepository.findAll(pageable);
+    public Page<ExamDTO> findAll(Pageable pageable) {
+        return examRepository.findAll(pageable).map(ExamMapper::toDto);
     }
 
     @Override
-    public Optional<Exam> findById(Long id) {
-        return examRepository.findById(id);
+    public Optional<ExamDTO> findById(Long id) {
+        return examRepository.findById(id).map(ExamMapper::toDto);
     }
 
     @Override
-    public Optional<Exam> update(Long id, ExamDTORequest examRequest) {
+    public Optional<ExamDTO> update(Long id, ExamDTORequest examRequest) {
         Optional<Exam> examOptional = examRepository.findById(id);
         if (examOptional.isEmpty()) {
-            return examOptional;
+            return examOptional.map(ExamMapper::toDto);
         } else{
             Exam exam = examOptional.get();
             BeanUtils.copyProperties(examRequest, exam, "id");
             Exam savedExam = examRepository.save(exam);
-            return Optional.of(savedExam);
+            return Optional.of(savedExam).map(ExamMapper::toDto);
         }
     }
 

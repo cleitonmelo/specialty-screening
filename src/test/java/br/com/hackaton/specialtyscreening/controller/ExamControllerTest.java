@@ -1,7 +1,7 @@
 package br.com.hackaton.specialtyscreening.controller;
 
+import br.com.hackaton.specialtyscreening.dto.ExamDTO;
 import br.com.hackaton.specialtyscreening.dto.ExamDTORequest;
-import br.com.hackaton.specialtyscreening.model.Exam;
 import br.com.hackaton.specialtyscreening.service.ExamService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterEach;
@@ -67,12 +67,12 @@ public class ExamControllerTest {
                 .examName("Exame de Sangue")
                 .build();
 
-        Exam createdExam = Exam.builder()
+        ExamDTO createdExamDto = ExamDTO.builder()
                 .id(1L)
                 .examName("Exame de Sangue")
                 .build();
 
-        when(examService.create(any(ExamDTORequest.class))).thenReturn(createdExam);
+        when(examService.create(any(ExamDTORequest.class))).thenReturn(createdExamDto);
 
         mockMvc.perform(post("/api/v1/exam")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -88,12 +88,12 @@ public class ExamControllerTest {
                 .examName("Exame Atualizado")
                 .build();
 
-        Exam updatedExam = Exam.builder()
+        ExamDTO updatedExamDto = ExamDTO.builder()
                 .id(1L)
                 .examName("Exame Atualizado")
                 .build();
 
-        when(examService.update(Mockito.eq(1L), any(ExamDTORequest.class))).thenReturn(Optional.of(updatedExam));
+        when(examService.update(Mockito.eq(1L), any(ExamDTORequest.class))).thenReturn(Optional.of(updatedExamDto));
 
         mockMvc.perform(put("/api/v1/exam/1")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -120,12 +120,12 @@ public class ExamControllerTest {
 
     @Test
     void devePermitirBuscarUmExamePeloId() throws Exception {
-        Exam exam = Exam.builder()
+        ExamDTO examDto = ExamDTO.builder()
                 .id(1L)
                 .examName("Exame de Sangue")
                 .build();
 
-        when(examService.findById(1L)).thenReturn(Optional.of(exam));
+        when(examService.findById(1L)).thenReturn(Optional.of(examDto));
 
         mockMvc.perform(get("/api/v1/exam/1")
                         .contentType(MediaType.APPLICATION_JSON))

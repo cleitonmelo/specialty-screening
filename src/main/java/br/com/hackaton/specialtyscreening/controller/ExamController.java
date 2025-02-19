@@ -1,7 +1,7 @@
 package br.com.hackaton.specialtyscreening.controller;
 
+import br.com.hackaton.specialtyscreening.dto.ExamDTO;
 import br.com.hackaton.specialtyscreening.dto.ExamDTORequest;
-import br.com.hackaton.specialtyscreening.model.Exam;
 import br.com.hackaton.specialtyscreening.service.ExamService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,35 +23,35 @@ public class ExamController {
     private final ExamService examService;
 
     @PostMapping
-    public ResponseEntity<Exam> createExam(@RequestBody ExamDTORequest examDTORequest){
-        Exam exam = examService.create(examDTORequest);
-        return ResponseEntity.status(HttpStatus.CREATED).body(exam);
+    public ResponseEntity<ExamDTO> createExam(@RequestBody ExamDTORequest examDTORequest){
+        ExamDTO examDto = examService.create(examDTORequest);
+        return ResponseEntity.status(HttpStatus.CREATED).body(examDto);
     }
 
     @GetMapping
-    public ResponseEntity<Page<Exam>> getAllExam(@PageableDefault(page = 0, size = 10) Pageable pageable) {
-        Page<Exam> examsPage =  examService.findAll(pageable);
-        return ResponseEntity.ok(examsPage);
+    public ResponseEntity<Page<ExamDTO>> getAllExam(@PageableDefault(page = 0, size = 10) Pageable pageable) {
+        Page<ExamDTO> examsDtoPage =  examService.findAll(pageable);
+        return ResponseEntity.ok(examsDtoPage);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> getOneExam(@PathVariable("id") Long id) {
-        Optional<Exam> examOptional = examService.findById(id);
-        if(examOptional.isEmpty()){
+        Optional<ExamDTO> examDtoOptional = examService.findById(id);
+        if(examDtoOptional.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Exam not found");
         } else {
-            return ResponseEntity.status(HttpStatus.OK).body(examOptional.get());
+            return ResponseEntity.status(HttpStatus.OK).body(examDtoOptional.get());
         }
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateExam(@PathVariable("id") Long id, @RequestBody ExamDTORequest examDTORequest)
     {
-        Optional<Exam> examOptional = examService.update(id, examDTORequest);
-        if(examOptional.isEmpty()){
+        Optional<ExamDTO> examDtoOptional = examService.update(id, examDTORequest);
+        if(examDtoOptional.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Exam not found");
         } else {
-            return ResponseEntity.ok(examOptional.get());
+            return ResponseEntity.ok(examDtoOptional.get());
         }
     }
 

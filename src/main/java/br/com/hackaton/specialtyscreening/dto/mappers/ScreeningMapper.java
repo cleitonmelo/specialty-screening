@@ -90,11 +90,4 @@ public class ScreeningMapper implements BaseMapper {
                 .build();
 
     }
-    public static ScreeningDTO resourceToDto(ScreeningResource resource) {
-        return ScreeningDTO.builder()
-                .id(resource.id())
-                .patientCode(resource.patientCode())
-                .patientName(resource.patientName())
-                .build();
-    }
 }

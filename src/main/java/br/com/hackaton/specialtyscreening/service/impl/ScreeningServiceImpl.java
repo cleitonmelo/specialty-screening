@@ -120,8 +120,17 @@ public class ScreeningServiceImpl extends BaseServiceImpl implements ScreeningSe
     }
 
     @Override
-    public List<ScreeningResource> findAllbyScreeningStatus(Long screeningStatus) {
-        return List.of(screeningRepository.findAllbyScreeningStatus(screeningStatus));
+    public List<Screening> findAllByStatus(ScreeningStatus status) {
+        return screeningRepository.findAllByStatus(status);
+    }
+
+    @Override
+    public void updateCompletedExamStatus(Long id) {
+        Screening screening = screeningRepository.findById(id).orElse(null);
+        if ( screening != null ) {
+            screening.setStatus(ScreeningStatus.COMPLETED_EXAMS);
+            screeningRepository.save(screening);
+        }
     }
 
     @Override

@@ -2,9 +2,12 @@ package br.com.hackaton.specialtyscreening.service;
 
 import br.com.hackaton.specialtyscreening.controller.resources.ScreeningResource;
 import br.com.hackaton.specialtyscreening.dto.ScreeningDTO;
+import br.com.hackaton.specialtyscreening.enums.ScreeningStatus;
 import br.com.hackaton.specialtyscreening.model.Diagnosis;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 public interface ScreeningService extends BaseService{
 
@@ -23,4 +26,6 @@ public interface ScreeningService extends BaseService{
     ScreeningResource finishedDiagnosis(Long id, Diagnosis diagnosis);
 
     Page<ScreeningResource> findAll(Pageable pageable);
+
+    List<ScreeningResource> findAllbyScreeningStatus(Long screeningStatus);
 }

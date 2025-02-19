@@ -68,6 +68,14 @@ https://github.com/cleitonmelo/specialty-screening.git
 - [Listar Especialistas](docs/specialists/list.md)
 - [Atualizar um Especialista](docs/specialists/update.md)
 
+### Exames
+
+- [Cadastrar um Exame](docs/exams/create.md)
+- [Listar Exames](docs/exams/list.md)
+- [Visualizar um Exame](docs/exams/show.md)
+- [Atualizar um Exame](docs/exams/update.md)
+- [Deletar um Exame](docs/exams/delete.md)
+
 ### Lista de Enums
 
 - [Status de Diagnósticos](docs/enums/diagnosis.md)

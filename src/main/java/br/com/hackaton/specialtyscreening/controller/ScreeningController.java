@@ -5,7 +5,6 @@ import br.com.hackaton.specialtyscreening.controller.resources.ScreeningResource
 import br.com.hackaton.specialtyscreening.dto.*;
 import br.com.hackaton.specialtyscreening.dto.mappers.ScreeningMapper;
 import br.com.hackaton.specialtyscreening.model.Diagnosis;
-import br.com.hackaton.specialtyscreening.model.Exam;
 import br.com.hackaton.specialtyscreening.service.DiagnosisService;
 import br.com.hackaton.specialtyscreening.service.ExamService;
 import br.com.hackaton.specialtyscreening.service.ScreeningService;
@@ -163,9 +162,9 @@ public class ScreeningController extends BaseController{
     public ResponseEntity<BaseResource> associateExams(@PathVariable("id") Long id,
                                                              @PathVariable("examId") Long examId) {
 
-        Optional<Exam> examOptional = this.examService.findById(examId);
+        Optional<ExamDTO> examDtoOptional = this.examService.findById(examId);
 
-        if ( examOptional.isEmpty() )  {
+        if ( examDtoOptional.isEmpty() )  {
             return this.badRequestException(HttpStatus.NOT_FOUND.name(),
                     "Exame não localizado para associar ao formulário de triagem");
         }

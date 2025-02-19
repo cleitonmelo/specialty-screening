@@ -26,7 +26,6 @@ public class UpdateMedicalExamResultJob implements BaseJob{
 
     @Scheduled(fixedRateString = "${job.exam.update.interval}")
     public void updateResultExams() {
-
         log.info("Updating Medical Exam Results");
         try {
             List<Screening> screenings = screeningService.findAllByStatus(ScreeningStatus.AWAITING_EXAMS);
@@ -37,18 +36,9 @@ public class UpdateMedicalExamResultJob implements BaseJob{
                 log.info("This Medical exam will be updated: "+screening.getId());
                 screeningService.updateCompletedExamStatus(screening.getId());
             }
-
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.error("Error updating Medical Exam Results", e);
             throw e;
         }
-
-
-
-//        screeningService
-//                .findAllByStatus(ScreeningStatus.AWAITING_EXAMS.getCode()).forEach(screening -> {
-//                    log.info("This Medical exam will be updated: "+screening.toString());
-//                    screeningService.update(ScreeningMapper.resourceToDto(screening));
-//                });
     }
 }

@@ -19,6 +19,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ScreeningServiceImpl extends BaseServiceImpl implements ScreeningService {
@@ -116,6 +117,20 @@ public class ScreeningServiceImpl extends BaseServiceImpl implements ScreeningSe
     public Page<ScreeningResource> findAll(Pageable pageable) {
         Page<Screening> screenings = screeningRepository.findAll(pageable);
         return screenings.map(ScreeningMapper::toResourceByModel);
+    }
+
+    @Override
+    public List<Screening> findAllByStatus(ScreeningStatus status) {
+        return screeningRepository.findAllByStatus(status);
+    }
+
+    @Override
+    public void updateCompletedExamStatus(Long id) {
+        Screening screening = screeningRepository.findById(id).orElse(null);
+        if ( screening != null ) {
+            screening.setStatus(ScreeningStatus.COMPLETED_EXAMS);
+            screeningRepository.save(screening);
+        }
     }
 
     @Override

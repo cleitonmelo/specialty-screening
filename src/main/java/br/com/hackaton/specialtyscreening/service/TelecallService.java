@@ -13,5 +13,5 @@ public interface TelecallService extends BaseService{
     List<TelecallDTO> findAll();
     Page<TelecallDTO> findAll(Pageable pageable);
     Boolean deleteById(Long id);
-
+    TelecallDTO getTelecallInfo(Long id);
 }

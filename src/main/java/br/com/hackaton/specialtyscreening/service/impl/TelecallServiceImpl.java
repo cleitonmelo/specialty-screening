@@ -1,5 +1,6 @@
 package br.com.hackaton.specialtyscreening.service.impl;
 
+import br.com.hackaton.specialtyscreening.config.AppServiceTelecall;
 import br.com.hackaton.specialtyscreening.dto.TelecallDTO;
 import br.com.hackaton.specialtyscreening.dto.mappers.TeleCallMapper;
 import br.com.hackaton.specialtyscreening.model.Telecall;
@@ -7,7 +8,9 @@ import br.com.hackaton.specialtyscreening.repository.TelecallRepository;
 import br.com.hackaton.specialtyscreening.service.TelecallService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +20,11 @@ public class TelecallServiceImpl extends BaseServiceImpl implements TelecallServ
 
     private final TelecallRepository telecallRepository;
 
-    public TelecallServiceImpl(TelecallRepository telecallRepository) {
+    private final AppServiceTelecall appServiceTelecall;
+
+    public TelecallServiceImpl(TelecallRepository telecallRepository, AppServiceTelecall appServiceTelecall) {
         this.telecallRepository = telecallRepository;
+        this.appServiceTelecall = appServiceTelecall;
     }
     @Override
     public TelecallDTO save(TelecallDTO telecallDTO) {
@@ -73,5 +79,17 @@ public class TelecallServiceImpl extends BaseServiceImpl implements TelecallServ
             return true;
         }
         return false;
+    }
+    @Override
+    public TelecallDTO getTelecallInfo(Long id){
+        RestTemplate restTemplate = new RestTemplate();
+
+        ResponseEntity<TelecallDTO> response = restTemplate
+                .getForEntity(appServiceTelecall.getUrl() + id,
+                        TelecallDTO.class);
+        if(response.getStatusCode().is2xxSuccessful()){
+            return response.getBody();
+        }
+        return null;
     }
 }

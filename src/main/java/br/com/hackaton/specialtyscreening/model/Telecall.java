@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Builder
 @AllArgsConstructor
@@ -17,4 +19,8 @@ public class Telecall implements BaseModel {
     private String status;
 
     private String description;
+
+    private LocalDateTime initialDateTime;
+
+    private LocalDateTime finalDateTime;
 }

@@ -3,7 +3,9 @@ package br.com.hackaton.specialtyscreening.service.impl;
 import br.com.hackaton.specialtyscreening.controller.resources.ScreeningResource;
 import br.com.hackaton.specialtyscreening.dto.PatientDTO;
 import br.com.hackaton.specialtyscreening.dto.ScreeningDTO;
+import br.com.hackaton.specialtyscreening.dto.TelecallDTO;
 import br.com.hackaton.specialtyscreening.dto.mappers.ScreeningMapper;
+import br.com.hackaton.specialtyscreening.dto.mappers.TeleCallMapper;
 import br.com.hackaton.specialtyscreening.enums.ScreeningStatus;
 import br.com.hackaton.specialtyscreening.model.Diagnosis;
 import br.com.hackaton.specialtyscreening.model.Exam;
@@ -14,6 +16,7 @@ import br.com.hackaton.specialtyscreening.repository.ExamRepository;
 import br.com.hackaton.specialtyscreening.repository.ScreeningRepository;
 import br.com.hackaton.specialtyscreening.service.PatientService;
 import br.com.hackaton.specialtyscreening.service.ScreeningService;
+import br.com.hackaton.specialtyscreening.service.TelecallService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -28,12 +31,14 @@ public class ScreeningServiceImpl extends BaseServiceImpl implements ScreeningSe
     private final ExamRepository examRepository;
 
     private final PatientService patientService;
+    private final TelecallService telecallService;
 
-    public ScreeningServiceImpl(ScreeningRepository screeningRepository, PatientService patientService, ExamRepository examRepository) {
+    public ScreeningServiceImpl(ScreeningRepository screeningRepository, PatientService patientService, ExamRepository examRepository, TelecallService telecallService) {
         super();
         this.screeningRepository = screeningRepository;
         this.patientService = patientService;
         this.examRepository = examRepository;
+        this.telecallService = telecallService;
     }
 
     @Override
@@ -46,6 +51,8 @@ public class ScreeningServiceImpl extends BaseServiceImpl implements ScreeningSe
         }
         PatientDTO patientDto = this.patientService.getPatientInfo(screeningDTO.patientCode());
         screening.setPatientName(patientDto.getName());
+        TelecallDTO telecallDTO = this.telecallService.getTelecallInfo(1L);
+        screening.setTelecall(TeleCallMapper.toEntity(telecallDTO));
 
         return ScreeningMapper.toDto(screeningRepository.save(screening));
     }

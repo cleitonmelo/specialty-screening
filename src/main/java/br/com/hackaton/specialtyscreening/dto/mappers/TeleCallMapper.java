@@ -11,6 +11,8 @@ public class TeleCallMapper  implements BaseMapper{
         return TelecallDTO
                 .builder()
                 .id(telecall.getId())
+                .initialDateTime(telecall.getInitialDateTime())
+                .finalDateTime(telecall.getFinalDateTime())
                 .status(telecall.getStatus())
                 .description(telecall.getDescription())
                 .build();
@@ -19,6 +21,8 @@ public class TeleCallMapper  implements BaseMapper{
         return Telecall
                 .builder()
                 .id(telecallDTO.id())
+                .initialDateTime(telecallDTO.initialDateTime())
+                .finalDateTime(telecallDTO.finalDateTime())
                 .status(telecallDTO.status())
                 .description(telecallDTO.description())
                 .build();

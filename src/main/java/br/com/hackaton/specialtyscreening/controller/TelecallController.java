@@ -4,6 +4,7 @@ import br.com.hackaton.specialtyscreening.dto.TelecallDTO;
 import br.com.hackaton.specialtyscreening.service.impl.TelecallServiceImpl;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springdoc.core.annotations.ParameterObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -20,9 +21,11 @@ public class TelecallController {
 
     private final TelecallServiceImpl telecallService;
 
+    @Autowired
     public TelecallController(TelecallServiceImpl telecallService) {
         this.telecallService = telecallService;
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<TelecallDTO> findById(@PathVariable Long id) {
         TelecallDTO telecallDTO = this.telecallService.findById(id);

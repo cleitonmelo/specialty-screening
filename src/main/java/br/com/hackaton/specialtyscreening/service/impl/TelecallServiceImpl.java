@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -36,17 +37,32 @@ public class TelecallServiceImpl extends BaseServiceImpl implements TelecallServ
 
     @Override
     public TelecallDTO findById(Long id) {
+        Telecall telecall = telecallRepository.findById(id).orElse(null);
+        if (telecall != null) {
+            return TeleCallMapper.toDTO(telecall);
+        }
         return null;
+
     }
 
     @Override
     public List<TelecallDTO> findAll() {
-        return List.of();
+
+        List<Telecall> telecalls = telecallRepository.findAll();
+        List<TelecallDTO> telecallDTOS = new ArrayList<>();
+        for (Telecall telecall : telecalls) {
+            telecallDTOS.add(TeleCallMapper.toDTO(telecall));
+        }
+        if (telecallDTOS.size() > 0) {
+            return telecallDTOS;
+        }
+        return null;
     }
 
     @Override
-    public Page<TelecallDTO> findAll(Pageable pageable) {
-        return null;
+    public Page<TelecallDTO> findAll(Pageable pageable){
+        Page<Telecall> telecalls = telecallRepository.findAll(pageable);
+        return telecalls.map(TeleCallMapper::toDTO);
     }
 
     @Override

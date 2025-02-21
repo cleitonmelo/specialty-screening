@@ -6,11 +6,6 @@ Listar todos os status possíveis para um diagnóstico
 - **Ponto de acesso:** `api/v1/status/diagnosis`
 - **Código HTTP:** `200 Ok`
 
-#### Parâmetros
-| **Campo**    | **Tipo** | **Descrição**           | **Requerido** | **Enum**   |
-|--------------|----------|-------------------------|---------------|------------|
-| specialty_id | Number   | Código da Especialidade | Não           |            |
-
 ```shell
 curl --location 'http://localhost:8080/api/v1/status/diagnosis'
 ```

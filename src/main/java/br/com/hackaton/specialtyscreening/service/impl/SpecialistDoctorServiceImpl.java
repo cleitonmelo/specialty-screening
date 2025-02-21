@@ -1,6 +1,7 @@
 package br.com.hackaton.specialtyscreening.service.impl;
 
 import br.com.hackaton.specialtyscreening.dto.SpecialistDoctorDTO;
+import br.com.hackaton.specialtyscreening.dto.SpecialtyDTO;
 import br.com.hackaton.specialtyscreening.dto.mappers.SpecialistDoctorMapper;
 import br.com.hackaton.specialtyscreening.model.SpecialistDoctor;
 import br.com.hackaton.specialtyscreening.repository.SpecialistDoctorRepository;
@@ -8,6 +9,8 @@ import br.com.hackaton.specialtyscreening.service.SpecialistDoctorService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class SpecialistDoctorServiceImpl extends BaseServiceImpl implements SpecialistDoctorService {
@@ -50,5 +53,10 @@ public class SpecialistDoctorServiceImpl extends BaseServiceImpl implements Spec
     public Page<SpecialistDoctorDTO> findAll(Pageable pageable) {
         Page<SpecialistDoctor> doctors = this.repository.findAll(pageable);
         return doctors.map(SpecialistDoctorMapper::toDto);
+    }
+
+    @Override
+    public List<SpecialtyDTO> specialities(SpecialtyDTO t) {
+        return List.of();
     }
 }

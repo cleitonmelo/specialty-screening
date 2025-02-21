@@ -12,7 +12,7 @@ public enum ScreeningStatus {
     AWAITING_TELECALL(4, "Aguardando Tele Chamada"),
     STARTED_TELECALL(5, "Iniciou a Tele Chamada"),
     FINISHED_TELECALL(6, "Tele Chamada Concluída"),
-    COMPLETED_DIAGNOSIS(7, "Diagnótico Concluído");
+    COMPLETED_DIAGNOSIS(7, "Diagnóstico Concluído");
 
     private int code;
 

@@ -28,4 +28,12 @@ public class ExamMapper implements BaseMapper{
                 .examDescription(exam.getExamDescription())
                 .build();
     }
+
+    public static Exam toEntity(ExamDTO examDTO) {
+        return Exam.builder()
+                .id(examDTO.id())
+                .examName(examDTO.examName())
+                .examDescription(examDTO.examDescription())
+                .build();
+    }
 }

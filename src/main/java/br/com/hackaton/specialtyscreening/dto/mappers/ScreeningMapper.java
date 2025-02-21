@@ -42,6 +42,10 @@ public class ScreeningMapper implements BaseMapper {
                 .patientCode(dto.patientCode())
                 .patientName(dto.patientName())
                 .specialty(specialty)
+                .specialistDoctor(dto.specialistDoctor() != null ?
+                        SpecialistDoctorMapper.toEntity(dto.specialistDoctor()) : null)
+                .exam(dto.medicalExams() != null ? dto.medicalExams()
+                        .stream().map(ExamMapper::toEntity).toList() : null)
                 .status(dto.status())
                 .build();
     }

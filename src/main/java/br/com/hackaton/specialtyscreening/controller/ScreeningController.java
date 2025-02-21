@@ -5,6 +5,7 @@ import br.com.hackaton.specialtyscreening.controller.resources.ScreeningResource
 import br.com.hackaton.specialtyscreening.dto.*;
 import br.com.hackaton.specialtyscreening.dto.mappers.ScreeningMapper;
 import br.com.hackaton.specialtyscreening.model.Diagnosis;
+import br.com.hackaton.specialtyscreening.model.Screening;
 import br.com.hackaton.specialtyscreening.service.DiagnosisService;
 import br.com.hackaton.specialtyscreening.service.ExamService;
 import br.com.hackaton.specialtyscreening.service.ScreeningService;
@@ -95,11 +96,22 @@ public class ScreeningController extends BaseController{
                     "Especialidade não localizada para efetuar o cadastro!");
         }
 
+        ScreeningDTO savedDto = ScreeningDTO.builder()
+                .id(dto.id())
+                .specialty(screeningDTO.specialty() == null ? dto.specialty() : screeningDTO.specialty())
+                .patientCode(screeningDTO.patientCode() == null ? dto.patientCode() : screeningDTO.patientCode())
+                .patientName(screeningDTO.patientName() == null ? dto.patientName() : screeningDTO.patientName())
+                .status(dto.status())
+                .specialistDoctor(dto.specialistDoctor())
+                .medicalExams(dto.medicalExams())
+                .diagnosisDTO(dto.diagnosisDTO())
+                .build();
+
         return ResponseEntity.ok().body(
                 ScreeningMapper.toResource(
-                        this.screeningService.update(screeningDTO),
-                        this.specialtyService.get(dto.specialty()),
-                        this.specialistDoctorService.get(dto.specialistDoctor().id())
+                        this.screeningService.update(savedDto),
+                        screeningDTO.specialty() != null ? this.specialtyService.get(screeningDTO.specialty()) : null,
+                        dto.specialistDoctor() != null ? this.specialistDoctorService.get(dto.specialistDoctor().id()) : null
                 )
         );
     }

@@ -1,8 +1,12 @@
 package br.com.hackaton.specialtyscreening.dto.mappers;
 
 import br.com.hackaton.specialtyscreening.controller.resources.SpecialistDoctorResource;
+import br.com.hackaton.specialtyscreening.dto.ScreeningDTO;
 import br.com.hackaton.specialtyscreening.dto.SpecialistDoctorDTO;
+import br.com.hackaton.specialtyscreening.dto.SpecialtyDTO;
 import br.com.hackaton.specialtyscreening.model.SpecialistDoctor;
+
+import java.util.List;
 
 public class SpecialistDoctorMapper implements BaseMapper {
 
@@ -31,11 +35,12 @@ public class SpecialistDoctorMapper implements BaseMapper {
                 .build();
     }
 
-    public static SpecialistDoctorResource toResource(SpecialistDoctorDTO specialistDoctorDTO) {
+    public static SpecialistDoctorResource toResource(SpecialistDoctorDTO dto,
+                                                      List<SpecialtyDTO> specialties) {
         return SpecialistDoctorResource.builder()
-                .id(specialistDoctorDTO.id())
-                .name(specialistDoctorDTO.name())
-                .specialties(specialistDoctorDTO.specialties())
+                .id(dto.id())
+                .name(dto.name())
+                .specialties(specialties)
                 .build();
     }
 }

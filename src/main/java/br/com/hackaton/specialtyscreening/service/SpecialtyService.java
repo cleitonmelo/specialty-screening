@@ -4,6 +4,8 @@ import br.com.hackaton.specialtyscreening.dto.SpecialtyDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 public interface SpecialtyService {
 
     SpecialtyDTO save(SpecialtyDTO dto);

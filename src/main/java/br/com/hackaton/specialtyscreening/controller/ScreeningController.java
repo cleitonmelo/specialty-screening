@@ -83,7 +83,7 @@ public class ScreeningController extends BaseController{
 
     @PutMapping("/{id}")
     public ResponseEntity<BaseResource> update(@RequestBody ScreeningDTO screeningDTO,
-                                                    @PathVariable("id") Long id)
+                                               @PathVariable("id") Long id)
     {
         ScreeningDTO dto = this.screeningService.get(id);
         if ( dto == null ) {

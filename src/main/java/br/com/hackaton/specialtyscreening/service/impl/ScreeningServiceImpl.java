@@ -55,6 +55,9 @@ public class ScreeningServiceImpl extends BaseServiceImpl implements ScreeningSe
     {
         Screening screening = ScreeningMapper.toEntity(
                 screeningDTO, findSpecialtyById(screeningDTO.specialty()));
+        PatientDTO patientDto = this.patientService.getPatientInfo(screeningDTO.patientCode());
+        screening.setPatientName(patientDto.getName());
+
         return ScreeningMapper.toDto(screeningRepository.save(screening));
     }
 

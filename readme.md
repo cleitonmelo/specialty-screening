@@ -1,6 +1,6 @@
 # Fila de Triagem de Especialidades
 
-Sistema responsável pelo controle de fila de triagem para especialidades. O objetivo do sistema
+Sistema responsável pelo controle de fila de triagem para especialidades. O objetivo do sistema é ...
 
 Url de acesso: http://localhost:8080/api/v1
 

@@ -1,6 +1,7 @@
 package br.com.hackaton.specialtyscreening.controller;
 
 import br.com.hackaton.specialtyscreening.service.impl.SpecialistDoctorServiceImpl;
+import br.com.hackaton.specialtyscreening.service.impl.SpecialtyServiceImpl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,6 +16,9 @@ class SpecialistControllerTest {
     @Mock
     SpecialistDoctorServiceImpl service;
 
+    @Mock
+    SpecialtyServiceImpl specialtyService;
+
     SpecialistDoctorController controller;
 
     AutoCloseable openMocks;
@@ -22,7 +26,7 @@ class SpecialistControllerTest {
     @BeforeEach
     void setUp() {
         openMocks = MockitoAnnotations.openMocks(this);
-        controller = new SpecialistDoctorController(service);
+        controller = new SpecialistDoctorController(service,specialtyService);
     }
 
     @AfterEach

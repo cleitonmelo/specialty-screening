@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationProperties(prefix = "service.api.teleconference")
+@ConfigurationProperties(prefix = "service.api.telecall")
 @Getter @Setter
 public class AppServiceTeleCall {
     private String url;

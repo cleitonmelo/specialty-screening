@@ -3,7 +3,9 @@ package br.com.hackaton.specialtyscreening.service.impl;
 import br.com.hackaton.specialtyscreening.controller.resources.ScreeningResource;
 import br.com.hackaton.specialtyscreening.dto.PatientDTO;
 import br.com.hackaton.specialtyscreening.dto.ScreeningDTO;
+import br.com.hackaton.specialtyscreening.dto.TeleCallDTO;
 import br.com.hackaton.specialtyscreening.dto.mappers.ScreeningMapper;
+import br.com.hackaton.specialtyscreening.dto.mappers.TeleCallMapper;
 import br.com.hackaton.specialtyscreening.enums.ScreeningStatus;
 import br.com.hackaton.specialtyscreening.model.Diagnosis;
 import br.com.hackaton.specialtyscreening.model.Exam;
@@ -27,12 +29,14 @@ public class ScreeningServiceImpl extends BaseServiceImpl implements ScreeningSe
     private final ScreeningRepository screeningRepository;
     private final ExamRepository examRepository;
     private final PatientService patientService;
+    private final TeleCallServiceImpl teleCallService;
 
-    public ScreeningServiceImpl(ScreeningRepository screeningRepository, PatientService patientService, ExamRepository examRepository) {
+    public ScreeningServiceImpl(ScreeningRepository screeningRepository, PatientService patientService, ExamRepository examRepository, TeleCallServiceImpl teleCallService) {
         super();
         this.screeningRepository = screeningRepository;
         this.patientService = patientService;
         this.examRepository = examRepository;
+        this.teleCallService = teleCallService;
     }
 
     @Override
@@ -133,21 +137,33 @@ public class ScreeningServiceImpl extends BaseServiceImpl implements ScreeningSe
     }
 
     @Override
-    public void setIdTeleCall() {
-        //@todo aqui você deve criar um serviço no ms telecall
-        System.out.println("setIdTeleCall");
+    public void setIdTeleCall(Long id) {
+        Screening screening = screeningRepository.findById(id).orElse(null);
+        if ( screening != null ) {
+            TeleCallDTO teleCallDTO = teleCallService.setIdTeleCall();
+            screening .setTelecall(TeleCallMapper.toEntity(teleCallDTO));
+            screeningRepository.save(screening);
+        }
     }
 
     @Override
-    public void startTelecall() {
-        //@todo aqui você deve chamar o serviço para iniciar uma chamada
-        System.out.println("startTelecall");
+    public void startTeleCall(Long id) {
+        Screening screening = screeningRepository.findById(id).orElse(null);
+        if ( screening != null ) {
+            TeleCallDTO teleCallDTO = teleCallService.start(screening.getTelecall());
+            screening .setTelecall(TeleCallMapper.toEntity(teleCallDTO));
+            screeningRepository.save(screening);
+        }
     }
 
     @Override
-    public void endTelecall() {
-        //@todo aqui você deve chamar o serviço para encerrar uma chamada
-        System.out.println("endTelecall");
+    public void endTeleCall(Long id) {
+        Screening screening = screeningRepository.findById(id).orElse(null);
+        if ( screening != null ) {
+            TeleCallDTO teleCallDTO = teleCallService.stop(screening.getTelecall());
+            screening .setTelecall(TeleCallMapper.toEntity(teleCallDTO));
+            screeningRepository.save(screening);
+        }
     }
 
     @Override

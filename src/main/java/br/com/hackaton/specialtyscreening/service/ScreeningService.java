@@ -32,9 +32,9 @@ public interface ScreeningService extends BaseService{
 
     void updateCompletedExamStatus(Long id);
 
-    void setIdTeleCall();
+    void setIdTeleCall(Long id);
 
-    void startTelecall();
+    void startTeleCall(Long id);
 
-    void endTelecall();
+    void endTeleCall(Long id);
 }

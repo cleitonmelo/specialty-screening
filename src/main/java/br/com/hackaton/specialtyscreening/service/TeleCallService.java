@@ -5,7 +5,7 @@ import br.com.hackaton.specialtyscreening.model.TeleCall;
 
 public interface TeleCallService {
 
-    TeleCallDTO schedule();
+    TeleCallDTO setIdTeleCall();
     TeleCallDTO start(TeleCall teleCall);
     TeleCallDTO stop(TeleCall teleCall);
 }

@@ -4,22 +4,43 @@ import br.com.hackaton.specialtyscreening.config.AppServiceTeleCall;
 import br.com.hackaton.specialtyscreening.dto.TeleCallDTO;
 import br.com.hackaton.specialtyscreening.model.TeleCall;
 import br.com.hackaton.specialtyscreening.service.TeleCallService;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.UUID;
+
+@Service
 public class TeleCallServiceImpl implements TeleCallService {
 
     public final AppServiceTeleCall appServiceTeleCall;
 
-    public TeleCallServiceImpl() {
-        this.appServiceTeleCall = new AppServiceTeleCall();
+    public TeleCallServiceImpl(AppServiceTeleCall appServiceTeleCall) {
+        this.appServiceTeleCall = appServiceTeleCall;
     }
     @Override
-    public TeleCallDTO schedule() {
+    public TeleCallDTO setIdTeleCall() {
         RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<TeleCallDTO> response = restTemplate.postForEntity(
+                appServiceTeleCall.getUrl(),null,
+                TeleCallDTO.class);
 
-        ResponseEntity<TeleCallDTO> response = restTemplate.getForEntity(
-                appServiceTeleCall.getUrl(),
+        if ( response.getStatusCode().is2xxSuccessful() ) {
+            return response.getBody();
+        }
+
+        return null;
+    }
+    @Override
+    public TeleCallDTO start(TeleCall teleCall) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<UUID> requestEntity = new HttpEntity<>(teleCall.getId(), headers);
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<TeleCallDTO> response = restTemplate.exchange(
+                appServiceTeleCall.getUrl()+"/"+teleCall.getId().toString(),
+                HttpMethod.PUT,
+                requestEntity,
                 TeleCallDTO.class);
 
         if ( response.getStatusCode().is2xxSuccessful() ) {
@@ -30,27 +51,16 @@ public class TeleCallServiceImpl implements TeleCallService {
     }
 
     @Override
-    public TeleCallDTO start(TeleCall teleCall) {
-        RestTemplate restTemplate = new RestTemplate();
-
-        ResponseEntity<TeleCallDTO> response = restTemplate.getForEntity(
-                appServiceTeleCall.getUrl() +"/{id}",
-                TeleCallDTO.class,teleCall.getId());
-
-        if ( response.getStatusCode().is2xxSuccessful() ) {
-            return response.getBody();
-        }
-
-        return null;
-    }
-
-    @Override
     public TeleCallDTO stop(TeleCall teleCall) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<UUID> requestEntity = new HttpEntity<>(teleCall.getId(), headers);
         RestTemplate restTemplate = new RestTemplate();
-
-        ResponseEntity<TeleCallDTO> response = restTemplate.getForEntity(
-                appServiceTeleCall.getUrl() +"/{id}",
-                TeleCallDTO.class,teleCall.getId());
+        ResponseEntity<TeleCallDTO> response = restTemplate.exchange(
+                appServiceTeleCall.getUrl()+"/"+teleCall.getId().toString(),
+                HttpMethod.PUT,
+                requestEntity,
+                TeleCallDTO.class);
 
         if ( response.getStatusCode().is2xxSuccessful() ) {
             return response.getBody();

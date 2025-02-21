@@ -5,6 +5,7 @@ import br.com.hackaton.specialtyscreening.dto.ExamDTORequest;
 import br.com.hackaton.specialtyscreening.service.ExamService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -32,7 +33,9 @@ public class ExamController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<ExamDTO>> getAllExam(@PageableDefault(page = 0, size = 10) Pageable pageable) {
+    public ResponseEntity<Page<ExamDTO>> getAllExam(
+            @ParameterObject
+            @PageableDefault(page = 0, size = 10) Pageable pageable) {
         Page<ExamDTO> examsDtoPage =  examService.findAll(pageable);
         return ResponseEntity.ok(examsDtoPage);
     }

@@ -1,6 +1,8 @@
 # Fila de Triagem de Especialidades
 
-Sistema responsável pelo controle de fila de triagem para especialidades. O objetivo do sistema é ...
+Sistema responsável pelo controle de fila de triagem para especialidades. O objetivo do sistema é diminuir o tempo médio
+das filas de especialidades existentes hoje no SUS, no qual a ideia é abrir para uma pré avaliação de um especialista que
+pode ser encontrado em qualquer localidade dentro do País.
 
 Url de acesso: http://localhost:8080/api/v1
 
@@ -42,7 +44,8 @@ https://github.com/cleitonmelo/specialty-screening.git
 
 ## Collection para importação no Postman
 
-
+## Swagger
+http://localhost:8080/swagger-ui/index.html
 
 ## Documentação API
 
@@ -79,6 +82,4 @@ https://github.com/cleitonmelo/specialty-screening.git
 ### Lista de Enums
 
 - [Status de Diagnósticos](docs/enums/diagnosis.md)
-
-## Swagger
-http://localhost:8080/swagger-ui/index.html
+- [Status de Formulário de Triagem](docs/enums/screenings.md)

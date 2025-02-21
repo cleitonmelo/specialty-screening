@@ -8,6 +8,6 @@ import org.springframework.stereotype.Component;
 @Component
 @ConfigurationProperties(prefix = "service.api.teleconference")
 @Getter @Setter
-public class AppServiceTeleConference {
+public class AppServiceTeleCall {
     private String url;
 }

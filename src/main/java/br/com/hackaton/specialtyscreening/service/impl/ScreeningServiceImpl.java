@@ -14,6 +14,7 @@ import br.com.hackaton.specialtyscreening.repository.ExamRepository;
 import br.com.hackaton.specialtyscreening.repository.ScreeningRepository;
 import br.com.hackaton.specialtyscreening.service.PatientService;
 import br.com.hackaton.specialtyscreening.service.ScreeningService;
+import br.com.hackaton.specialtyscreening.service.TeleCallService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -26,14 +27,15 @@ public class ScreeningServiceImpl extends BaseServiceImpl implements ScreeningSe
 
     private final ScreeningRepository screeningRepository;
     private final ExamRepository examRepository;
-
     private final PatientService patientService;
+    private final TeleCallService teleCallService;
 
-    public ScreeningServiceImpl(ScreeningRepository screeningRepository, PatientService patientService, ExamRepository examRepository) {
+    public ScreeningServiceImpl(ScreeningRepository screeningRepository, PatientService patientService, ExamRepository examRepository, TeleCallService teleCallService) {
         super();
         this.screeningRepository = screeningRepository;
         this.patientService = patientService;
         this.examRepository = examRepository;
+        this.teleCallService = teleCallService;
     }
 
     @Override

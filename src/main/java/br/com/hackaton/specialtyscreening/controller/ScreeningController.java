@@ -171,4 +171,22 @@ public class ScreeningController extends BaseController{
         }
         return ResponseEntity.ok().body(this.screeningService.finishedDiagnosis(id, diagnosis));
     }
+
+    @PostMapping("/{id}/telecall")
+    public ResponseEntity<String> scheduleTelecall(@PathVariable("id") Long id){
+        this.screeningService.setIdTeleCall();
+        return ResponseEntity.ok("Chamada Agendada com Sucesso !!!");
+    }
+
+    @PutMapping("/{id}/telecall/start")
+    public ResponseEntity<String> startTelecall(@PathVariable("id") Long id){
+        this.screeningService.startTelecall();
+        return ResponseEntity.ok("Chamada Finalizada com Sucesso !!!");
+    }
+
+    @PutMapping("/{id}/telecall/end")
+    public ResponseEntity<String> endTelecall(@PathVariable("id") Long id){
+        this.screeningService.endTelecall();
+        return ResponseEntity.ok("Chamada Finalizada com Sucesso !!!");
+    }
 }

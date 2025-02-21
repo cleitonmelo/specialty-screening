@@ -14,7 +14,6 @@ import br.com.hackaton.specialtyscreening.repository.ExamRepository;
 import br.com.hackaton.specialtyscreening.repository.ScreeningRepository;
 import br.com.hackaton.specialtyscreening.service.PatientService;
 import br.com.hackaton.specialtyscreening.service.ScreeningService;
-import br.com.hackaton.specialtyscreening.service.TeleCallService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -28,14 +27,12 @@ public class ScreeningServiceImpl extends BaseServiceImpl implements ScreeningSe
     private final ScreeningRepository screeningRepository;
     private final ExamRepository examRepository;
     private final PatientService patientService;
-    private final TeleCallService teleCallService;
 
-    public ScreeningServiceImpl(ScreeningRepository screeningRepository, PatientService patientService, ExamRepository examRepository, TeleCallService teleCallService) {
+    public ScreeningServiceImpl(ScreeningRepository screeningRepository, PatientService patientService, ExamRepository examRepository) {
         super();
         this.screeningRepository = screeningRepository;
         this.patientService = patientService;
         this.examRepository = examRepository;
-        this.teleCallService = teleCallService;
     }
 
     @Override
@@ -133,6 +130,24 @@ public class ScreeningServiceImpl extends BaseServiceImpl implements ScreeningSe
             screening.setStatus(ScreeningStatus.COMPLETED_EXAMS);
             screeningRepository.save(screening);
         }
+    }
+
+    @Override
+    public void setIdTeleCall() {
+        //@todo aqui você deve criar um serviço no ms telecall
+        System.out.println("setIdTeleCall");
+    }
+
+    @Override
+    public void startTelecall() {
+        //@todo aqui você deve chamar o serviço para iniciar uma chamada
+        System.out.println("startTelecall");
+    }
+
+    @Override
+    public void endTelecall() {
+        //@todo aqui você deve chamar o serviço para encerrar uma chamada
+        System.out.println("endTelecall");
     }
 
     @Override

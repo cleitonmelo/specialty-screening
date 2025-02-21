@@ -1,6 +1,6 @@
-### Criar um formulário de triagem
+### Finalizar o Formulário enviando um diagnóstico
 
-Recebe os dados para a criação de um formulário de triagem de especialidade
+Recebe os dados para a finalização do diagnóstico
 
 - **Método:** `POST`
 - **Ponto de acesso:** `api/v1/screening/{id}/diagnosis`

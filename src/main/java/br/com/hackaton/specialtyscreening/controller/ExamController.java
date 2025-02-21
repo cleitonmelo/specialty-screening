@@ -3,6 +3,7 @@ package br.com.hackaton.specialtyscreening.controller;
 import br.com.hackaton.specialtyscreening.dto.ExamDTO;
 import br.com.hackaton.specialtyscreening.dto.ExamDTORequest;
 import br.com.hackaton.specialtyscreening.service.ExamService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,6 +18,8 @@ import java.util.Optional;
 @RestController
 @RequestMapping("api/v1/exam")
 @RequiredArgsConstructor
+@Tag(name = "Cadastro de Exames",
+        description = "API para gerenciamento de cadastro de exames")
 public class ExamController {
 
     @Autowired

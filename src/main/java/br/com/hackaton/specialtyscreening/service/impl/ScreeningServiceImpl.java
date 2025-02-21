@@ -45,8 +45,9 @@ public class ScreeningServiceImpl extends BaseServiceImpl implements ScreeningSe
             screening.setStatus(ScreeningStatus.AWATING_SPECIALIST);
         }
         PatientDTO patientDto = this.patientService.getPatientInfo(screeningDTO.patientCode());
-        screening.setPatientName(patientDto.getName());
-
+        if ( patientDto != null ) {
+            screening.setPatientName(patientDto.getName());
+        }
         return ScreeningMapper.toDto(screeningRepository.save(screening));
     }
 
@@ -55,9 +56,6 @@ public class ScreeningServiceImpl extends BaseServiceImpl implements ScreeningSe
     {
         Screening screening = ScreeningMapper.toEntity(
                 screeningDTO, findSpecialtyById(screeningDTO.specialty()));
-        PatientDTO patientDto = this.patientService.getPatientInfo(screeningDTO.patientCode());
-        screening.setPatientName(patientDto.getName());
-
         return ScreeningMapper.toDto(screeningRepository.save(screening));
     }
 

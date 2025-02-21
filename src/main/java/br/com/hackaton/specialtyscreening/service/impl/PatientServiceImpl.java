@@ -18,17 +18,21 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public PatientDTO getPatientInfo(String patientCode) {
-        RestTemplate restTemplate = new RestTemplate();
+        try {
+            RestTemplate restTemplate = new RestTemplate();
 
-        ResponseEntity<PatientDTO> response = restTemplate.getForEntity(
-                appServicePatient.getUrl() + "/patient/cpf?cpf={id}",
-                PatientDTO.class,
-                patientCode);
+            ResponseEntity<PatientDTO> response = restTemplate.getForEntity(
+                    appServicePatient.getUrl() + "/patient/cpf?cpf={id}",
+                    PatientDTO.class,
+                    patientCode);
 
-        if ( response.getStatusCode().is2xxSuccessful() ) {
-            return response.getBody();
+            if ( response.getStatusCode().is2xxSuccessful() ) {
+                return response.getBody();
+            }
+
+            return null;
+        }catch (Exception e){
+            return null;
         }
-
-        return null;
     }
 }

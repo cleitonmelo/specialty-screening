@@ -52,6 +52,9 @@ public class TeleCallServiceImpl implements TeleCallService {
 
     @Override
     public TeleCallDTO stop(TeleCall teleCall) {
+        if (teleCall.getId() == null || teleCall.getInitialDateTime() == null) {
+            return null;
+        }
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<UUID> requestEntity = new HttpEntity<>(teleCall.getId(), headers);

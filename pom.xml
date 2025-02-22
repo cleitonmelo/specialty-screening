@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>br.com.hackaton</groupId>
 	<artifactId>specialty-screening </artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>specialty-screening </name>
 	<description>Triagem de Especialidades - Fiap Hackaton</description>
 	<url/>

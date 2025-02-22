@@ -2,6 +2,7 @@ package br.com.hackaton.specialtyscreening.controller;
 
 import br.com.hackaton.specialtyscreening.controller.resources.BaseResource;
 import br.com.hackaton.specialtyscreening.controller.resources.ScreeningResource;
+import br.com.hackaton.specialtyscreening.controller.resources.TeleCallResource;
 import br.com.hackaton.specialtyscreening.dto.*;
 import br.com.hackaton.specialtyscreening.dto.mappers.ScreeningMapper;
 import br.com.hackaton.specialtyscreening.model.Diagnosis;
@@ -185,20 +186,18 @@ public class ScreeningController extends BaseController{
     }
 
     @PostMapping("/{id}/telecall")
-    public ResponseEntity<String> setIdTeleCall(@PathVariable("id") Long id){
+    public ResponseEntity<TeleCallResource> setIdTeleCall(@PathVariable("id") Long id){
         this.screeningService.setIdTeleCall(id);
-        return ResponseEntity.ok("Chamada Agendada com Sucesso !!!");
+        return ResponseEntity.ok(this.screeningService.setIdTeleCall(id));
     }
 
     @PutMapping("/{id}/telecall/start")
-    public ResponseEntity<String> startTelecall(@PathVariable("id") Long id){
-        this.screeningService.startTeleCall(id);
-        return ResponseEntity.ok("Chamada Iniciada com Sucesso !!!");
+    public ResponseEntity<TeleCallResource> startTelecall(@PathVariable("id") Long id){
+        return ResponseEntity.ok(this.screeningService.startTeleCall(id));
     }
 
     @PutMapping("/{id}/telecall/end")
-    public ResponseEntity<String> endTelecall(@PathVariable("id") Long id){
-        this.screeningService.endTeleCall(id);
-        return ResponseEntity.ok("Chamada Finalizada com Sucesso !!!");
+    public ResponseEntity<TeleCallResource> endTelecall(@PathVariable("id") Long id){
+        return ResponseEntity.ok(this.screeningService.endTeleCall(id));
     }
 }

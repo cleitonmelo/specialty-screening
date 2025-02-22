@@ -1,6 +1,7 @@
 package br.com.hackaton.specialtyscreening.service;
 
 import br.com.hackaton.specialtyscreening.controller.resources.ScreeningResource;
+import br.com.hackaton.specialtyscreening.controller.resources.TeleCallResource;
 import br.com.hackaton.specialtyscreening.dto.ScreeningDTO;
 import br.com.hackaton.specialtyscreening.enums.ScreeningStatus;
 import br.com.hackaton.specialtyscreening.model.Diagnosis;
@@ -32,9 +33,9 @@ public interface ScreeningService extends BaseService{
 
     void updateCompletedExamStatus(Long id);
 
-    void setIdTeleCall(Long id);
+    TeleCallResource setIdTeleCall(Long id);
 
-    void startTeleCall(Long id);
+    TeleCallResource startTeleCall(Long id);
 
-    void endTeleCall(Long id);
+    TeleCallResource endTeleCall(Long id);
 }

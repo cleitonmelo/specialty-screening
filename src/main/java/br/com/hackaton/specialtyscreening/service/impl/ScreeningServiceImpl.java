@@ -1,6 +1,7 @@
 package br.com.hackaton.specialtyscreening.service.impl;
 
 import br.com.hackaton.specialtyscreening.controller.resources.ScreeningResource;
+import br.com.hackaton.specialtyscreening.controller.resources.TeleCallResource;
 import br.com.hackaton.specialtyscreening.dto.PatientDTO;
 import br.com.hackaton.specialtyscreening.dto.ScreeningDTO;
 import br.com.hackaton.specialtyscreening.dto.TeleCallDTO;
@@ -138,33 +139,39 @@ public class ScreeningServiceImpl extends BaseServiceImpl implements ScreeningSe
     }
 
     @Override
-    public void setIdTeleCall(Long id) {
+    public TeleCallResource setIdTeleCall(Long id) {
         Screening screening = screeningRepository.findById(id).orElse(null);
         if ( screening != null ) {
             TeleCallDTO teleCallDTO = teleCallService.setIdTeleCall();
             screening .setTelecall(TeleCallMapper.toEntity(teleCallDTO));
             screeningRepository.save(screening);
+            return TeleCallMapper.toResource(teleCallDTO);
         }
+        return null;
     }
 
     @Override
-    public void startTeleCall(Long id) {
+    public TeleCallResource startTeleCall(Long id) {
         Screening screening = screeningRepository.findById(id).orElse(null);
         if ( screening != null ) {
             TeleCallDTO teleCallDTO = teleCallService.start(screening.getTelecall());
             screening .setTelecall(TeleCallMapper.toEntity(teleCallDTO));
             screeningRepository.save(screening);
+            return TeleCallMapper.toResource(teleCallDTO);
         }
+        return null;
     }
 
     @Override
-    public void endTeleCall(Long id) {
+    public TeleCallResource endTeleCall(Long id) {
         Screening screening = screeningRepository.findById(id).orElse(null);
         if ( screening != null ) {
             TeleCallDTO teleCallDTO = teleCallService.stop(screening.getTelecall());
             screening .setTelecall(TeleCallMapper.toEntity(teleCallDTO));
             screeningRepository.save(screening);
+            return TeleCallMapper.toResource(teleCallDTO);
         }
+        return null;
     }
 
     @Override

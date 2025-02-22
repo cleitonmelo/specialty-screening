@@ -79,6 +79,11 @@ http://localhost:8080/swagger-ui/index.html
 - [Atualizar um Exame](docs/exams/update.md)
 - [Deletar um Exame](docs/exams/delete.md)
 
+### Telechamadas
+- [Criar Telechamada](docs/telecall/create.md)
+- [Iniciar Telechamada](docs/telecall/start.md)
+- [Finalizar Telechamada](docs/telecall/stop.md)
+
 ### Lista de Enums
 
 - [Status de Diagnósticos](docs/enums/diagnosis.md)

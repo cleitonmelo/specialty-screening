@@ -3,6 +3,7 @@ package br.com.hackaton.specialtyscreening.controller.resources;
 import br.com.hackaton.specialtyscreening.dto.ExamDTO;
 import br.com.hackaton.specialtyscreening.dto.SpecialistDoctorDTO;
 import br.com.hackaton.specialtyscreening.dto.SpecialtyDTO;
+import br.com.hackaton.specialtyscreening.dto.TeleCallDTO;
 import lombok.Builder;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public record ScreeningResource(
         SpecialistDoctorDTO specialistDoctor,
         String teleCall,
         List<ExamDTO> medicalExams,
-        DiagnosisResource diagnosis
+        DiagnosisResource diagnosis,
+        TeleCallDTO telecall
 ) implements BaseResource{
 }

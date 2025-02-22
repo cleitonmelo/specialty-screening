@@ -31,4 +31,10 @@ public interface ScreeningService extends BaseService{
     List<Screening> findAllByStatus(ScreeningStatus status);
 
     void updateCompletedExamStatus(Long id);
+
+    void setIdTeleCall(Long id);
+
+    void startTeleCall(Long id);
+
+    void endTeleCall(Long id);
 }

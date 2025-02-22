@@ -3,7 +3,9 @@ package br.com.hackaton.specialtyscreening.service.impl;
 import br.com.hackaton.specialtyscreening.controller.resources.ScreeningResource;
 import br.com.hackaton.specialtyscreening.dto.PatientDTO;
 import br.com.hackaton.specialtyscreening.dto.ScreeningDTO;
+import br.com.hackaton.specialtyscreening.dto.TeleCallDTO;
 import br.com.hackaton.specialtyscreening.dto.mappers.ScreeningMapper;
+import br.com.hackaton.specialtyscreening.dto.mappers.TeleCallMapper;
 import br.com.hackaton.specialtyscreening.enums.ScreeningStatus;
 import br.com.hackaton.specialtyscreening.model.Diagnosis;
 import br.com.hackaton.specialtyscreening.model.Exam;
@@ -26,14 +28,15 @@ public class ScreeningServiceImpl extends BaseServiceImpl implements ScreeningSe
 
     private final ScreeningRepository screeningRepository;
     private final ExamRepository examRepository;
-
     private final PatientService patientService;
+    private final TeleCallServiceImpl teleCallService;
 
-    public ScreeningServiceImpl(ScreeningRepository screeningRepository, PatientService patientService, ExamRepository examRepository) {
+    public ScreeningServiceImpl(ScreeningRepository screeningRepository, PatientService patientService, ExamRepository examRepository, TeleCallServiceImpl teleCallService) {
         super();
         this.screeningRepository = screeningRepository;
         this.patientService = patientService;
         this.examRepository = examRepository;
+        this.teleCallService = teleCallService;
     }
 
     @Override
@@ -130,6 +133,36 @@ public class ScreeningServiceImpl extends BaseServiceImpl implements ScreeningSe
         Screening screening = screeningRepository.findById(id).orElse(null);
         if ( screening != null ) {
             screening.setStatus(ScreeningStatus.COMPLETED_EXAMS);
+            screeningRepository.save(screening);
+        }
+    }
+
+    @Override
+    public void setIdTeleCall(Long id) {
+        Screening screening = screeningRepository.findById(id).orElse(null);
+        if ( screening != null ) {
+            TeleCallDTO teleCallDTO = teleCallService.setIdTeleCall();
+            screening .setTelecall(TeleCallMapper.toEntity(teleCallDTO));
+            screeningRepository.save(screening);
+        }
+    }
+
+    @Override
+    public void startTeleCall(Long id) {
+        Screening screening = screeningRepository.findById(id).orElse(null);
+        if ( screening != null ) {
+            TeleCallDTO teleCallDTO = teleCallService.start(screening.getTelecall());
+            screening .setTelecall(TeleCallMapper.toEntity(teleCallDTO));
+            screeningRepository.save(screening);
+        }
+    }
+
+    @Override
+    public void endTeleCall(Long id) {
+        Screening screening = screeningRepository.findById(id).orElse(null);
+        if ( screening != null ) {
+            TeleCallDTO teleCallDTO = teleCallService.stop(screening.getTelecall());
+            screening .setTelecall(TeleCallMapper.toEntity(teleCallDTO));
             screeningRepository.save(screening);
         }
     }

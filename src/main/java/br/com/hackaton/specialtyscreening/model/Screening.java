@@ -42,5 +42,5 @@ public class Screening implements BaseModel{
     private Diagnosis diagnosis;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private TeleCall telecall;
+    private TeleCall teleCall;
 }

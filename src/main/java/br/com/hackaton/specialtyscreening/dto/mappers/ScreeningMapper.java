@@ -32,6 +32,7 @@ public class ScreeningMapper implements BaseMapper {
               .status(screening.getStatus())
               .diagnosisDTO(screening.getDiagnosis() != null ?
                       DiagnosisMapper.toDto(screening.getDiagnosis()) : null)
+              .teleCallDTO(screening.getTeleCall() != null ? TeleCallMapper.toDTO(screening.getTeleCall()) : null)
               .build();
     }
 
@@ -47,6 +48,7 @@ public class ScreeningMapper implements BaseMapper {
                 .exam(dto.medicalExams() != null ? dto.medicalExams()
                         .stream().map(ExamMapper::toEntity).toList() : null)
                 .status(dto.status())
+                .teleCall(dto.teleCallDTO() != null ? TeleCallMapper.toEntity(dto.teleCallDTO()) : null)
                 .build();
     }
 
@@ -76,9 +78,9 @@ public class ScreeningMapper implements BaseMapper {
                 .specialty(specialtyDTO)
                 .specialistDoctor(specialistDoctorDTO)
                 .status(dto.status().getDescription())
-                .teleCall(null)
                 .medicalExams(dto.medicalExams())
                 .diagnosis(dto.diagnosisDTO() != null ? DiagnosisMapper.toResource(dto.diagnosisDTO()) : null)
+                .teleCall(dto.teleCallDTO() != null ? dto.teleCallDTO() : null)
                 .build();
     }
 
@@ -90,7 +92,7 @@ public class ScreeningMapper implements BaseMapper {
                 .specialty(SpecialtyMapper.toDto(screening.getSpecialty()))
                 .specialistDoctor(screening.getSpecialistDoctor() != null ? SpecialistDoctorMapper.toDto(screening.getSpecialistDoctor()) : null)
                 .status(screening.getStatus().getDescription())
-                .teleCall(null)
+                .teleCall(screening.getTeleCall() != null ? TeleCallMapper.toDTO(screening.getTeleCall()) : null)
                 .medicalExams(screening.getExam() != null?
                         ExamMapper.toDto(screening.getExam()) : null)
                 .diagnosis(screening.getDiagnosis() != null ?

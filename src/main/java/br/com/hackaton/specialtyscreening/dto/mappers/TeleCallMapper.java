@@ -5,19 +5,19 @@ import br.com.hackaton.specialtyscreening.dto.TeleCallDTO;
 import br.com.hackaton.specialtyscreening.model.TeleCall;
 
 public class TeleCallMapper {
-    public static TeleCallDTO toDTO(TeleCall telecallModel) {
+    public static TeleCallDTO toDTO(TeleCall teleCallModel) {
         return TeleCallDTO.builder()
-                .uuid(telecallModel.getId())
-                .initialDateTime(telecallModel.getInitialDateTime())
-                .finalDateTime(telecallModel.getFinalDateTime())
+                .uuid(teleCallModel.getId())
+                .initialDateTime(teleCallModel.getInitialDateTime())
+                .finalDateTime(teleCallModel.getFinalDateTime())
                 .build();
     }
 
-    public static TeleCall toEntity(TeleCallDTO telecallDTO) {
+    public static TeleCall toEntity(TeleCallDTO teleCallDTO) {
         return TeleCall.builder()
-                .id(telecallDTO.uuid())
-                .initialDateTime(telecallDTO.initialDateTime())
-                .finalDateTime(telecallDTO.finalDateTime())
+                .id(teleCallDTO.uuid())
+                .initialDateTime(teleCallDTO.initialDateTime())
+                .finalDateTime(teleCallDTO.finalDateTime())
                 .build();
     }
     public static TeleCallResource toResource(TeleCallDTO teleCallDTO) {

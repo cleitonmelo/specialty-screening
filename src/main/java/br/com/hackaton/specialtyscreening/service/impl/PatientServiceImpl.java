@@ -5,6 +5,7 @@ import br.com.hackaton.specialtyscreening.dto.PatientDTO;
 import br.com.hackaton.specialtyscreening.service.PatientService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
 @Service
@@ -31,8 +32,23 @@ public class PatientServiceImpl implements PatientService {
             }
 
             return null;
-        }catch (Exception e){
-            return null;
+        }catch (HttpServerErrorException e){
+            try {
+                RestTemplate restTemplate = new RestTemplate();
+
+                ResponseEntity<PatientDTO> response = restTemplate.getForEntity(
+                        appServicePatient.getUrl() + "/patient/rne?rne={id}",
+                        PatientDTO.class,
+                        patientCode);
+
+                if (response.getStatusCode().is2xxSuccessful()) {
+                    return response.getBody();
+                }
+
+                return null;
+            }catch (Exception ex){
+                return null;
+            }
         }
     }
 }

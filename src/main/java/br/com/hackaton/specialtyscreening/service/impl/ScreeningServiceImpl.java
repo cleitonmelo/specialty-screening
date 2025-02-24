@@ -8,11 +8,7 @@ import br.com.hackaton.specialtyscreening.dto.TeleCallDTO;
 import br.com.hackaton.specialtyscreening.dto.mappers.ScreeningMapper;
 import br.com.hackaton.specialtyscreening.dto.mappers.TeleCallMapper;
 import br.com.hackaton.specialtyscreening.enums.ScreeningStatus;
-import br.com.hackaton.specialtyscreening.model.Diagnosis;
-import br.com.hackaton.specialtyscreening.model.Exam;
-import br.com.hackaton.specialtyscreening.model.Screening;
-import br.com.hackaton.specialtyscreening.model.SpecialistDoctor;
-import br.com.hackaton.specialtyscreening.model.Specialty;
+import br.com.hackaton.specialtyscreening.model.*;
 import br.com.hackaton.specialtyscreening.repository.ExamRepository;
 import br.com.hackaton.specialtyscreening.repository.ScreeningRepository;
 import br.com.hackaton.specialtyscreening.service.PatientService;
@@ -23,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ScreeningServiceImpl extends BaseServiceImpl implements ScreeningService {
@@ -139,37 +136,40 @@ public class ScreeningServiceImpl extends BaseServiceImpl implements ScreeningSe
     }
 
     @Override
-    public TeleCallResource setIdTeleCall(Long id) {
+    public ScreeningResource setIdTeleCall(Long id) {
         Screening screening = screeningRepository.findById(id).orElse(null);
         if ( screening != null ) {
             TeleCallDTO teleCallDTO = teleCallService.setIdTeleCall();
-            screening .setTeleCall(TeleCallMapper.toEntity(teleCallDTO));
-            screeningRepository.save(screening);
-            return TeleCallMapper.toResource(teleCallDTO);
+            screening.setTeleCall(TeleCallMapper.toEntity(teleCallDTO));
+            screening.setStatus(ScreeningStatus.AWAITING_TELECALL);
+            Screening save = screeningRepository.save(screening);
+            return ScreeningMapper.toResourceByModel(save);
         }
         return null;
     }
 
     @Override
-    public TeleCallResource startTeleCall(Long id) {
+    public ScreeningResource startTeleCall(Long id) {
         Screening screening = screeningRepository.findById(id).orElse(null);
         if ( screening != null ) {
             TeleCallDTO teleCallDTO = teleCallService.start(screening.getTeleCall());
-            screening .setTeleCall(TeleCallMapper.toEntity(teleCallDTO));
-            screeningRepository.save(screening);
-            return TeleCallMapper.toResource(teleCallDTO);
+            screening.setTeleCall(TeleCallMapper.toEntity(teleCallDTO));
+            screening.setStatus(ScreeningStatus.STARTED_TELECALL);
+            Screening save = screeningRepository.save(screening);
+            return ScreeningMapper.toResourceByModel(save);
         }
         return null;
     }
 
     @Override
-    public TeleCallResource endTeleCall(Long id) {
+    public ScreeningResource endTeleCall(Long id) {
         Screening screening = screeningRepository.findById(id).orElse(null);
         if ( screening != null ) {
             TeleCallDTO teleCallDTO = teleCallService.stop(screening.getTeleCall());
-            screening .setTeleCall(TeleCallMapper.toEntity(teleCallDTO));
-            screeningRepository.save(screening);
-            return TeleCallMapper.toResource(teleCallDTO);
+            screening.setTeleCall(TeleCallMapper.toEntity(teleCallDTO));
+            screening.setStatus(ScreeningStatus.FINISHED_TELECALL);
+            Screening save = screeningRepository.save(screening);
+            return ScreeningMapper.toResourceByModel(save);
         }
         return null;
     }
@@ -190,4 +190,5 @@ public class ScreeningServiceImpl extends BaseServiceImpl implements ScreeningSe
     private SpecialistDoctor findDoctorById(Long id) {
         return SpecialistDoctor.builder().id(id).build();
     }
+
 }

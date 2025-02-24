@@ -187,18 +187,18 @@ public class ScreeningController extends BaseController{
     }
 
     @PostMapping("/{id}/telecall")
-    public ResponseEntity<TeleCallResource> setIdTeleCall(@PathVariable("id") Long id){
+    public ResponseEntity<BaseResource> setIdTeleCall(@PathVariable("id") Long id){
         this.screeningService.setIdTeleCall(id);
-        return ResponseEntity.ok(this.screeningService.setIdTeleCall(id));
+        return ResponseEntity.ok().body(this.screeningService.setIdTeleCall(id));
     }
 
     @PutMapping("/{id}/telecall/start")
-    public ResponseEntity<TeleCallResource> startTelecall(@PathVariable("id") Long id){
+    public ResponseEntity<BaseResource> startTelecall(@PathVariable("id") Long id){
         return ResponseEntity.ok(this.screeningService.startTeleCall(id));
     }
 
     @PutMapping("/{id}/telecall/end")
-    public ResponseEntity<TeleCallResource> endTelecall(@PathVariable("id") Long id){
+    public ResponseEntity<BaseResource> endTelecall(@PathVariable("id") Long id){
         return ResponseEntity.ok(this.screeningService.endTeleCall(id));
     }
 }

@@ -16,9 +16,8 @@ public record ScreeningResource(
         SpecialtyDTO specialty,
         String status,
         SpecialistDoctorDTO specialistDoctor,
-        String teleCall,
         List<ExamDTO> medicalExams,
         DiagnosisResource diagnosis,
-        TeleCallDTO telecall
+        TeleCallDTO teleCall
 ) implements BaseResource{
 }

@@ -106,6 +106,7 @@ public class ScreeningController extends BaseController{
                 .specialistDoctor(dto.specialistDoctor())
                 .medicalExams(dto.medicalExams())
                 .diagnosisDTO(dto.diagnosisDTO())
+                .teleCallDTO(dto.teleCallDTO())
                 .build();
 
         return ResponseEntity.ok().body(

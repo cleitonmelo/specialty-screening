@@ -143,7 +143,7 @@ public class ScreeningServiceImpl extends BaseServiceImpl implements ScreeningSe
         Screening screening = screeningRepository.findById(id).orElse(null);
         if ( screening != null ) {
             TeleCallDTO teleCallDTO = teleCallService.setIdTeleCall();
-            screening .setTelecall(TeleCallMapper.toEntity(teleCallDTO));
+            screening .setTeleCall(TeleCallMapper.toEntity(teleCallDTO));
             screeningRepository.save(screening);
             return TeleCallMapper.toResource(teleCallDTO);
         }
@@ -154,8 +154,8 @@ public class ScreeningServiceImpl extends BaseServiceImpl implements ScreeningSe
     public TeleCallResource startTeleCall(Long id) {
         Screening screening = screeningRepository.findById(id).orElse(null);
         if ( screening != null ) {
-            TeleCallDTO teleCallDTO = teleCallService.start(screening.getTelecall());
-            screening .setTelecall(TeleCallMapper.toEntity(teleCallDTO));
+            TeleCallDTO teleCallDTO = teleCallService.start(screening.getTeleCall());
+            screening .setTeleCall(TeleCallMapper.toEntity(teleCallDTO));
             screeningRepository.save(screening);
             return TeleCallMapper.toResource(teleCallDTO);
         }
@@ -166,8 +166,8 @@ public class ScreeningServiceImpl extends BaseServiceImpl implements ScreeningSe
     public TeleCallResource endTeleCall(Long id) {
         Screening screening = screeningRepository.findById(id).orElse(null);
         if ( screening != null ) {
-            TeleCallDTO teleCallDTO = teleCallService.stop(screening.getTelecall());
-            screening .setTelecall(TeleCallMapper.toEntity(teleCallDTO));
+            TeleCallDTO teleCallDTO = teleCallService.stop(screening.getTeleCall());
+            screening .setTeleCall(TeleCallMapper.toEntity(teleCallDTO));
             screeningRepository.save(screening);
             return TeleCallMapper.toResource(teleCallDTO);
         }

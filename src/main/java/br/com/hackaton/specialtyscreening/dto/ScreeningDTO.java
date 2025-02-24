@@ -24,6 +24,8 @@ public record ScreeningDTO(
         @Schema(hidden = true)
         ScreeningStatus status,
         @Schema(hidden = true)
-        DiagnosisDTO diagnosisDTO
+        DiagnosisDTO diagnosisDTO,
+        @Schema(hidden = true)
+        TeleCallDTO teleCallDTO
 )  implements BaseDto {
 }

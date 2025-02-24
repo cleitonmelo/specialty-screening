@@ -24,7 +24,8 @@ public class ScreeningMapper implements BaseMapper {
               .id(screening.getId())
               .patientCode(screening.getPatientCode())
               .patientName(screening.getPatientName())
-              .specialty(screening.getSpecialty().getId())
+              .specialty(screening.getSpecialty() != null && screening.getSpecialty().getId() != null ?
+                      screening.getSpecialty().getId() : null)
               .specialistDoctor(screening.getSpecialistDoctor() != null ?
                       SpecialistDoctorMapper.toDto(screening.getSpecialistDoctor()) : null)
               .medicalExams(screening.getExam() != null?

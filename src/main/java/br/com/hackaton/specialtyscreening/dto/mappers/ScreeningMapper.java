@@ -5,10 +5,7 @@ import br.com.hackaton.specialtyscreening.dto.ExamDTO;
 import br.com.hackaton.specialtyscreening.dto.ScreeningDTO;
 import br.com.hackaton.specialtyscreening.dto.SpecialistDoctorDTO;
 import br.com.hackaton.specialtyscreening.dto.SpecialtyDTO;
-import br.com.hackaton.specialtyscreening.model.Exam;
-import br.com.hackaton.specialtyscreening.model.Screening;
-import br.com.hackaton.specialtyscreening.model.SpecialistDoctor;
-import br.com.hackaton.specialtyscreening.model.Specialty;
+import br.com.hackaton.specialtyscreening.model.*;
 import lombok.Builder;
 
 
@@ -33,7 +30,8 @@ public class ScreeningMapper implements BaseMapper {
               .status(screening.getStatus())
               .diagnosisDTO(screening.getDiagnosis() != null ?
                       DiagnosisMapper.toDto(screening.getDiagnosis()) : null)
-              .teleCallDTO(screening.getTeleCall() != null ? TeleCallMapper.toDTO(screening.getTeleCall()) : null)
+              .teleCallDTO(screening.getTeleCall() != null ?
+                      TeleCallMapper.toDTO(screening.getTeleCall()) : null)
               .build();
     }
 
@@ -66,6 +64,7 @@ public class ScreeningMapper implements BaseMapper {
                         .stream().map(ExamMapper::toEntity).toList() : null)
                 .status(dto.status())
                 .diagnosis(dto.diagnosisDTO() != null ? DiagnosisMapper.toEntity(dto.diagnosisDTO()) : null)
+                .teleCall(dto.teleCallDTO() != null ? TeleCallMapper.toEntity(dto.teleCallDTO()) : null)
                 .build();
     }
 
@@ -98,6 +97,8 @@ public class ScreeningMapper implements BaseMapper {
                         ExamMapper.toDto(screening.getExam()) : null)
                 .diagnosis(screening.getDiagnosis() != null ?
                         DiagnosisMapper.toResource(DiagnosisMapper.toDto(screening.getDiagnosis())) : null)
+                .teleCall(screening.getTeleCall() != null ?
+                        TeleCallMapper.toDTO(screening.getTeleCall()) : null)
                 .build();
 
     }

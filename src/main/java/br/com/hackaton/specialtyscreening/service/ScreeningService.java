@@ -33,9 +33,9 @@ public interface ScreeningService extends BaseService{
 
     void updateCompletedExamStatus(Long id);
 
-    TeleCallResource setIdTeleCall(Long id);
+    ScreeningResource setIdTeleCall(Long id);
 
-    TeleCallResource startTeleCall(Long id);
+    ScreeningResource startTeleCall(Long id);
 
-    TeleCallResource endTeleCall(Long id);
+    ScreeningResource endTeleCall(Long id);
 }

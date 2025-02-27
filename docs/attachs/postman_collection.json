@@ -1,0 +1,902 @@
+{
+	"info": {
+		"_postman_id": "1a4877a5-1645-4338-ad60-5eb84f7628ce",
+		"name": "Hackaton",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2557537"
+	},
+	"item": [
+		{
+			"name": "screening",
+			"item": [
+				{
+					"name": "associate",
+					"item": [
+						{
+							"name": "associateExam",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"patientCode\" : \"53631826028\",\n    \"specialty\": 6\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/screening/1/associateExam/1",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"screening",
+										"1",
+										"associateExam",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "associateSpecialists",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/screening/1/associateSpecialists/1",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"screening",
+										"1",
+										"associateSpecialists",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "finished",
+					"item": [
+						{
+							"name": "diagnosis",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"status\": \"PRESUMPTIVE\",\n  \"description\": \"string\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/screening/25/diagnosis",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"screening",
+										"25",
+										"diagnosis"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "telecall",
+					"item": [
+						{
+							"name": "schedule",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/screening/1/telecall",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"screening",
+										"1",
+										"telecall"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "start",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/screening/1/telecall/start",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"screening",
+										"1",
+										"telecall",
+										"start"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "end",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/screening/1/telecall/end",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"screening",
+										"1",
+										"telecall",
+										"end"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"patientCode\" : \"27551240080\",\n    \"specialty\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/screening",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"screening"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/screening/4",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"screening",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"specialty\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/screening/25",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"screening",
+								"25"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/screening",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"screening"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "specialty",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"Ortopedia\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/specialty",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"specialty"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"Otorrino\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/specialty/2",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"specialty",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/specialty",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"specialty"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/specialty/1",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"specialty",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "specialists",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"Dra. Adriano Filho\",\n    \"specialties\": [\n        {\n            \"id\" : 1\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/specialists",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"specialists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Dra. Vando\",\n    \"specialties\": [\n        {\n            \"id\": 3\n        },\n        {\n            \"id\": 2\n        },\n        {\n            \"id\": 5\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/specialists/4",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"specialists",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/specialists",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"specialists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/specialists/1",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"specialists",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "exam",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"examName\" :  \"Sangue\",\n    \"examDescription\" : \"Exame de coleta de sangue\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/exam",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"exam"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"specialties\": [\n        {\n            \"id\" : 3\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/specialists/1",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"specialists",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/exam",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"exam"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/specialists/1",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"specialists",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "enums",
+			"item": [
+				{
+					"name": "diagnosis",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/status/diagnosis",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"status",
+								"diagnosis"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "screenings",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/status/diagnosis",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"status",
+								"diagnosis"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "services",
+			"item": [
+				{
+					"name": "patient",
+					"item": [
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Antonio da Silva\",\n  \"cpf\": \"27551240080\",\n  \"rne\": null,\n  \"birthDate\": \"1980-02-22\",\n  \"email\": \"antonio.silva@gmail.com\",\n  \"phone\": \"11981591929\",\n  \"addresses\": [\n    {\n      \"street\": \"Rua Armenia\",\n      \"number\": \"510\",\n      \"complement\": null,\n      \"neighborhood\": \"Parque Dourado\",\n      \"city\": \"Jardim Dayse\",\n      \"state\": \"SP\",\n      \"zipCode\": \"08528400\"\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8094/api/v1/patient",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8094",
+									"path": [
+										"api",
+										"v1",
+										"patient"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "list",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8094/api/v1/patient",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8094",
+									"path": [
+										"api",
+										"v1",
+										"patient"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8094/api/v1/patient/67ba206832e097487290f41b",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8094",
+									"path": [
+										"api",
+										"v1",
+										"patient",
+										"67ba206832e097487290f41b"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Cleiton Melo da Silva\",\n    \"cpf\": \"29702332826\",\n    \"rne\": null,\n    \"birthDate\": \"1981-06-10\",\n    \"email\": \"cleiton.melo@gmail.com\",\n    \"phone\": \"19982581929\",\n    \"addresses\": [\n        {\n            \"street\": \"Rua Filipinas\",\n            \"number\": \"168\",\n            \"complement\": \"xxxxx\",\n            \"neighborhood\": \"PQ das Nações\",\n            \"city\": \"Americana\",\n            \"state\": \"SP\",\n            \"zipCode\": \"13470160\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8094/api/v1/patient/67ace84dc1dca03fbed7bd91",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8094",
+									"path": [
+										"api",
+										"v1",
+										"patient",
+										"67ace84dc1dca03fbed7bd91"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update Copy",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Cleiton Melo da Silva\",\n    \"cpf\": \"29702332826\",\n    \"rne\": null,\n    \"birthDate\": \"1981-06-10\",\n    \"email\": \"cleiton.melo@gmail.com\",\n    \"phone\": \"19982581929\",\n    \"addresses\": [\n        {\n            \"street\": \"Rua Filipinas\",\n            \"number\": \"168\",\n            \"complement\": \"xxxxx\",\n            \"neighborhood\": \"PQ das Nações\",\n            \"city\": \"Americana\",\n            \"state\": \"SP\",\n            \"zipCode\": \"13470160\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8094/api/v1/patient/67ace84dc1dca03fbed7bd91",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8094",
+									"path": [
+										"api",
+										"v1",
+										"patient",
+										"67ace84dc1dca03fbed7bd91"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "telecall",
+					"item": [
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8095/api/v1/telecall",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8095",
+									"path": [
+										"api",
+										"v1",
+										"telecall"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Cleiton Melo da Silva\",\n    \"cpf\": \"29702332826\",\n    \"rne\": null,\n    \"birthDate\": \"1981-06-10\",\n    \"email\": \"cleiton.melo@gmail.com\",\n    \"phone\": \"19982581929\",\n    \"addresses\": [\n        {\n            \"street\": \"Rua Filipinas\",\n            \"number\": \"168\",\n            \"complement\": \"xxxxx\",\n            \"neighborhood\": \"PQ das Nações\",\n            \"city\": \"Americana\",\n            \"state\": \"SP\",\n            \"zipCode\": \"13470160\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8095/api/v1/telecall/fdebd89e-7361-4348-8f1d-efed1a603604",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8095",
+									"path": [
+										"api",
+										"v1",
+										"telecall",
+										"fdebd89e-7361-4348-8f1d-efed1a603604"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://localhost:8080/api/v1",
+			"type": "default"
+		},
+		{
+			"key": "AUTH_TOKEN",
+			"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBhZG1pbi5jb20uYnIiLCJpYXQiOjE3MzgzNjAxMDEsImV4cCI6MTczODQ0NjUwMX0.3sGkRYGts39fFETo9gqdx3KDzMsO5kZQOI_Ni-0ReXo",
+			"type": "default"
+		}
+	]
+}

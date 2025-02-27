@@ -15,6 +15,9 @@ Url de acesso: http://localhost:8080/api/v1
 
 ![Stack](docs/image/img.png)
 
+## GIT - Repositório do projeto
+https://github.com/cleitonmelo/specialty-screening.git
+
 ## Iniciar testes unitários
 
 Execução dos testes unitários. Necessário ter o utilitário make instalado.
@@ -38,11 +41,15 @@ docker-compose up -d
 mvnw spring-boot:run
 ```
 
-## GIT
-https://github.com/cleitonmelo/specialty-screening.git
+#### Pré Requisitos
 
+Necessário baixar e rodar os projetos abaixo: 
+
+- https://github.com/adriano-pinheiro/fase5-mspatient
+- https://github.com/adriano-pinheiro/fase5-mstelecall
 
 ## Collection para importação no Postman
+- [Collection PostMan](/docs/attachs/postman_collection.json)
 
 ## Swagger
 http://localhost:8080/swagger-ui/index.html
